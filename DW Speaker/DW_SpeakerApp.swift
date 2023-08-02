@@ -12,6 +12,7 @@ struct DW_SpeakerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .frame(minWidth: 800, minHeight: 600)
         }
     }
 }
