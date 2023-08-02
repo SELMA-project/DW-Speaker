@@ -11,10 +11,11 @@ struct ContentView: View {
     
     @State var textToSpeak: String = "Hello, my name is Andy."
     
-    @State var selectedLanguage: Language = .English
-    enum Language: String, CaseIterable {
-        case German, English, Hindi, Urdu
-    }
+    @State var selectedLocale: Locale = Locale(identifier: "en-US")
+    @State var availableLocales: [Locale] = []
+//    enum Language: String, CaseIterable {
+//        case German, English, Hindi, Urdu
+//    }
 
     @State var selectedVoiceProvider: VoiceProvider = .Apple
     enum VoiceProvider: String, CaseIterable {
@@ -26,6 +27,8 @@ struct ContentView: View {
         case Andy, Johann, Alice
     }
     
+    var voiceManager = VoiceManager.shared
+    
     var body: some View {
         VStack(spacing: 0) {
             TextEditor(text: $textToSpeak)
@@ -34,9 +37,9 @@ struct ContentView: View {
                 .background(ignoresSafeAreaEdges: .all)
             
             HStack {
-                Picker("Language:", selection: $selectedLanguage) {
-                    ForEach(Language.allCases, id: \.self) { language in
-                        Text(language.rawValue).tag(language)
+                Picker("Language:", selection: $selectedLocale) {
+                    ForEach(availableLocales, id: \.self.identifier) { locale in
+                        Text(locale.description).tag(locale)
                     }
                 }
                 
@@ -59,6 +62,10 @@ struct ContentView: View {
             }
             .padding()
 
+        }.onAppear {
+            Task {
+                availableLocales = await voiceManager.availableLocales()
+            }
         }
         
     }
@@ -67,7 +74,7 @@ struct ContentView: View {
 struct BlueButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
+            .padding(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
             .foregroundColor(configuration.isPressed ? Color.blue : Color.white)
             .background(configuration.isPressed ? Color.white : Color.blue)
             .cornerRadius(6)
