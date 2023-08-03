@@ -9,25 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var textToSpeak: String = "Hello, my name is Andy."
+    @StateObject var voiceManager = VoiceManager()
     
-    @AppStorage("selectedLocaleId") var selectedLocaleId: String = "en-US"
-    @State var availableLocales: [Locale] = []
-//    enum Language: String, CaseIterable {
-//        case German, English, Hindi, Urdu
-//    }
+    @State var textToSpeak: String = "Hello, my name is Andy."
 
-    @State var selectedVoiceProvider: VoiceProvider = .Apple
-    enum VoiceProvider: String, CaseIterable {
-        case Apple, Azure, Google, ElevenLabs
-    }
+
 
     @State var selectedVoice: Voice = .Andy
     enum Voice: String, CaseIterable {
         case Andy, Johann, Alice
     }
     
-    var voiceManager = VoiceManager.shared
     
     var body: some View {
         VStack(spacing: 0) {
@@ -37,21 +29,21 @@ struct ContentView: View {
                 .background(ignoresSafeAreaEdges: .all)
             
             HStack {
-                Picker("Language:", selection: $selectedLocaleId) {
-                    ForEach(availableLocales, id: \.self.identifier) { locale in
-                        Text(locale.displayName).tag(locale.identifier)
+                Picker("Language:", selection: $voiceManager.selectedLocaleId) {
+                    ForEach(voiceManager.selectableLocales, id: \.identifier) { locale in
+                        Text(locale.displayName).tag(locale)
                     }
                 }
                 
-                Picker("Provider:", selection: $selectedVoiceProvider) {
-                    ForEach(VoiceProvider.allCases, id: \.self) { provider in
-                        Text(provider.rawValue).tag(provider)
+                Picker("Provider:", selection: $voiceManager.selectedProviderId) {
+                    ForEach(voiceManager.selectableProviders, id: \.id) { provider in
+                        Text(provider.displayName).tag(provider.id)
                     }
                 }
                 
-                Picker("Voice:", selection: $selectedVoice) {
-                    ForEach(Voice.allCases, id: \.self) { voice in
-                        Text(voice.rawValue).tag(voice)
+                Picker("Voice:", selection: $voiceManager.selectedVoiceId) {
+                    ForEach(voiceManager.selectableVoices, id: \.id) { voice in
+                        Text(voice.displayName).tag(voice.id)
                     }
                 }
                 
@@ -62,10 +54,6 @@ struct ContentView: View {
             }
             .padding()
 
-        }.onAppear {
-            Task {
-                availableLocales = await voiceManager.availableLocales()
-            }
         }
         
     }

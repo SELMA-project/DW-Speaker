@@ -20,4 +20,11 @@ protocol VoiceProvider {
     
     /// An array of the voices that are available for hte given locale.
     func availableVoicesForLocale(locale: Locale) async -> [Voice]
+    
+    /// The provider's preferred voice for the given locale
+    func preferedVoiceForLocale(locale: Locale) async -> Voice?
+    
+    func voice(forId voiceId: String) -> Voice
+    
+
 }

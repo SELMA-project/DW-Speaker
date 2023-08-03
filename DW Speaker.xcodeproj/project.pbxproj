@@ -23,6 +23,7 @@
 		C1106F282A7A980C0002BBAE /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F272A7A980C0002BBAE /* Voice.swift */; };
 		C1106F2A2A7A999B0002BBAE /* AppleVoiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F292A7A999B0002BBAE /* AppleVoiceProvider.swift */; };
 		C1106F2C2A7A9B330002BBAE /* VoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F2B2A7A9B330002BBAE /* VoiceManager.swift */; };
+		C16145CA2A7B935B0037AD4B /* Locale+displayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16145C92A7B935B0037AD4B /* Locale+displayName.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		C1106F272A7A980C0002BBAE /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		C1106F292A7A999B0002BBAE /* AppleVoiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleVoiceProvider.swift; sourceTree = "<group>"; };
 		C1106F2B2A7A9B330002BBAE /* VoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
+		C16145C92A7B935B0037AD4B /* Locale+displayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+displayName.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				C1106F272A7A980C0002BBAE /* Voice.swift */,
 				C1106F252A7A90650002BBAE /* VoiceProvider.swift */,
 				C1106F292A7A999B0002BBAE /* AppleVoiceProvider.swift */,
+				C16145C92A7B935B0037AD4B /* Locale+displayName.swift */,
 				C1106F102A7A8BFF0002BBAE /* Import */,
 				C1106F052A7A7F770002BBAE /* Assets.xcassets */,
 				C1106F072A7A7F770002BBAE /* DW_Speaker.entitlements */,
@@ -188,6 +191,7 @@
 				C1106F162A7A8C0B0002BBAE /* ElevenLabsVoiceManager.swift in Sources */,
 				C1106F042A7A7F750002BBAE /* ContentView.swift in Sources */,
 				C1106F2A2A7A999B0002BBAE /* AppleVoiceProvider.swift in Sources */,
+				C16145CA2A7B935B0037AD4B /* Locale+displayName.swift in Sources */,
 				C1106F262A7A90650002BBAE /* VoiceProvider.swift in Sources */,
 				C1106F2C2A7A9B330002BBAE /* VoiceManager.swift in Sources */,
 				C1106F1A2A7A8C0B0002BBAE /* SelmaVoice.swift in Sources */,
