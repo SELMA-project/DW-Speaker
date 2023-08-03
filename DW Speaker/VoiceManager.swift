@@ -28,7 +28,7 @@ class VoiceManager {
         }
         
         // sort by identifer while converting to an array
-        let sortedLocales = uniqueLocales.sorted {$0.identifier < $1.identifier}
+        let sortedLocales = uniqueLocales.sorted {$0.displayName < $1.displayName}
         
         return sortedLocales
     }
@@ -38,18 +38,24 @@ class VoiceManager {
     }
     
     func debug() {
-        let providers = availableProviders()
-        
-        Task {
-            
-            
-            let locales = await availableLocales()
-            
-            for locale in locales {
-                print(locale.identifier)
-            }
-        }
+    
+//        Task {
+//            
+//            let locales = await availableLocales()
+//            
+//            for locale in locales {
+//                //print(locale.identifier)
+//            }
+//        }
         
     }
     
+}
+
+extension Locale {
+    var displayName: String {
+        let currentLocale = Locale.current
+        let languageName = currentLocale.localizedString(forIdentifier: self.identifier) ?? "unknown language"
+        return languageName
+    }
 }

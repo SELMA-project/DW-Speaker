@@ -11,7 +11,7 @@ struct ContentView: View {
     
     @State var textToSpeak: String = "Hello, my name is Andy."
     
-    @State var selectedLocale: Locale = Locale(identifier: "en-US")
+    @AppStorage("selectedLocaleId") var selectedLocaleId: String = "en-US"
     @State var availableLocales: [Locale] = []
 //    enum Language: String, CaseIterable {
 //        case German, English, Hindi, Urdu
@@ -37,9 +37,9 @@ struct ContentView: View {
                 .background(ignoresSafeAreaEdges: .all)
             
             HStack {
-                Picker("Language:", selection: $selectedLocale) {
+                Picker("Language:", selection: $selectedLocaleId) {
                     ForEach(availableLocales, id: \.self.identifier) { locale in
-                        Text(locale.description).tag(locale)
+                        Text(locale.displayName).tag(locale.identifier)
                     }
                 }
                 
