@@ -14,11 +14,13 @@ class VoiceManager: ObservableObject {
     @Published var selectableProviders: [VoiceProvider] = []
     @Published var selectableVoices: [Voice] = []
     
+    /// The identifier of the selected language.
     @Published var selectedLocaleId: String = "" {
         didSet {
+            
+            // after the Locale changes, adjust the list of selectable provider and and choose the first on the list
             let selectedLocale = Locale(identifier: selectedLocaleId)
             Task {
-                
                 
                 let providers = await providers(forLocale: selectedLocale)
                 DispatchQueue.main.async {
@@ -37,8 +39,11 @@ class VoiceManager: ObservableObject {
         }
     }
     
+    /// The identifer of the selected provider.
     @Published var selectedProviderId: String = "" {
         didSet {
+            
+            // after the provider changes, adjust the list of selectable voice and choose the prefered one
             if let provider = availableProviders.filter({ $0.id == selectedProviderId}).first {
                 Task {
                     
@@ -58,6 +63,7 @@ class VoiceManager: ObservableObject {
         }
     }
     
+    /// The identifier of the selected voice.
     @Published var selectedVoiceId: String = ""
     
     private var availableProviders: [VoiceProvider] = []
@@ -87,14 +93,14 @@ class VoiceManager: ObservableObject {
     }
     
     /// All available voice providers.
-    func getAvailableProviders() -> [VoiceProvider] {
+    private func getAvailableProviders() -> [VoiceProvider] {
         let appleVoiceProvider = AppleVoiceProvider()
         
         return [appleVoiceProvider]
     }
     
     /// All available locales.
-    func availableLocales() async -> [Locale] {
+    private func availableLocales() async -> [Locale] {
         
         // store locales in set to assure uniqueness
         var uniqueLocales: Set<Locale> = Set()
@@ -111,7 +117,7 @@ class VoiceManager: ObservableObject {
     }
     
     /// An array of voice providers that support the given locale.
-    func providers(forLocale locale: Locale) async  -> [VoiceProvider] {
+    private func providers(forLocale locale: Locale) async  -> [VoiceProvider] {
 
         // all available providers
         let availableProviders = availableProviders
@@ -138,19 +144,6 @@ class VoiceManager: ObservableObject {
     }
     
 
-    
-    func debug() {
-    
-//        Task {
-//            
-//            let locales = await availableLocales()
-//            
-//            for locale in locales {
-//                //print(locale.identifier)
-//            }
-//        }
-        
-    }
     
 }
 

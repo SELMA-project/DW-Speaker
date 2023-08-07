@@ -19,10 +19,10 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
         // store locales in set to assure uniqueness
         var uniqueLocales: Set<Locale> = Set()
         
-        // get all availae avoices
+        // get all available avoices
         let allVoices = AVSpeechSynthesisVoice.speechVoices()
         
-        // add each voice's lanugaeIdentifier to the set
+        // add each voice's lanuageIdentifier to the set
         for voice in allVoices {
             let languageIdentifier = voice.language // BP47
             let locale = Locale(identifier: languageIdentifier)
