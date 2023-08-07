@@ -37,7 +37,7 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
 
     func availableVoicesForLocale(locale: Locale) async -> [Voice] {
         
-        var availableVoices: [Voice] = []
+        var availableVoices: [AppleVoice] = []
         
         let allVoices = AVSpeechSynthesisVoice.speechVoices()
         
@@ -64,17 +64,31 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
             let name = speechVoice.name
             let quality = speechVoice.quality
 
-            let displayName = "\(name) (\(quality)"
+            var displayName = "\(name)"
+            
+            // add quality to the displayName
+            if quality == .enhanced {displayName += " (enhanced)"}
+            if quality == .premium {displayName += " (premium)"}
             
             // create apple voice and add it to result
-            let appleVoice = AppleVoice(id: identifier, displayName: displayName)
+            let appleVoice = AppleVoice(id: identifier, displayName: displayName, quality: quality)
             availableVoices.append(appleVoice)
         }
         
         // sort by name
-        let sortedAvailableVoice = availableVoices.sorted {$0.displayName < $1.displayName}
+        let sortedAvailableVoices = availableVoices.sorted { (lhs, rhs) in
+            if lhs.quality.rawValue == rhs.quality.rawValue {
+                return lhs.displayName < rhs.displayName
+            }
+            
+            return lhs.quality.rawValue > rhs.quality.rawValue
+            
+        }
         
-        return sortedAvailableVoice
+        // map AppleVoices to Voices
+        let result = sortedAvailableVoices.map( {$0 as Voice} )
+        
+        return result
     }
     
     /// Return the voice with the highest quality as prefered voice
@@ -106,7 +120,7 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
         let identifier = nativeVoice.identifier
         let displayName = nativeVoice.name
         
-        let appleVoice = AppleVoice(id: identifier, displayName: displayName)
+        let appleVoice = AppleVoice(id: identifier, displayName: displayName, quality: nativeVoice.quality)
         return appleVoice
     }
 
@@ -116,8 +130,9 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
 struct AppleVoice: Voice {
     
     var id: String
-    
     var displayName: String
+    
+    var quality: AVSpeechSynthesisVoiceQuality
     
     func synthesizeText(_ text: String) async -> Data? {
         print("Speaking: \(text)")

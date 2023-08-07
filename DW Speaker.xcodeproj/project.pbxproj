@@ -22,7 +22,7 @@
 		C1106F262A7A90650002BBAE /* VoiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F252A7A90650002BBAE /* VoiceProvider.swift */; };
 		C1106F282A7A980C0002BBAE /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F272A7A980C0002BBAE /* Voice.swift */; };
 		C1106F2A2A7A999B0002BBAE /* AppleVoiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F292A7A999B0002BBAE /* AppleVoiceProvider.swift */; };
-		C1106F2C2A7A9B330002BBAE /* VoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F2B2A7A9B330002BBAE /* VoiceManager.swift */; };
+		C1106F2C2A7A9B330002BBAE /* VoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */; };
 		C16145CA2A7B935B0037AD4B /* Locale+displayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16145C92A7B935B0037AD4B /* Locale+displayName.swift */; };
 		C1D207782A80CD9500F56E26 /* VoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D207772A80CD9500F56E26 /* VoiceController.swift */; };
 /* End PBXBuildFile section */
@@ -45,7 +45,7 @@
 		C1106F252A7A90650002BBAE /* VoiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceProvider.swift; sourceTree = "<group>"; };
 		C1106F272A7A980C0002BBAE /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		C1106F292A7A999B0002BBAE /* AppleVoiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleVoiceProvider.swift; sourceTree = "<group>"; };
-		C1106F2B2A7A9B330002BBAE /* VoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
+		C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceViewModel.swift; sourceTree = "<group>"; };
 		C16145C92A7B935B0037AD4B /* Locale+displayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+displayName.swift"; sourceTree = "<group>"; };
 		C1D207772A80CD9500F56E26 /* VoiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,7 +82,7 @@
 			children = (
 				C1106F012A7A7F750002BBAE /* DW_SpeakerApp.swift */,
 				C1106F032A7A7F750002BBAE /* ContentView.swift */,
-				C1106F2B2A7A9B330002BBAE /* VoiceManager.swift */,
+				C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */,
 				C1D207772A80CD9500F56E26 /* VoiceController.swift */,
 				C1106F272A7A980C0002BBAE /* Voice.swift */,
 				C1106F252A7A90650002BBAE /* VoiceProvider.swift */,
@@ -196,7 +196,7 @@
 				C1106F2A2A7A999B0002BBAE /* AppleVoiceProvider.swift in Sources */,
 				C16145CA2A7B935B0037AD4B /* Locale+displayName.swift in Sources */,
 				C1106F262A7A90650002BBAE /* VoiceProvider.swift in Sources */,
-				C1106F2C2A7A9B330002BBAE /* VoiceManager.swift in Sources */,
+				C1106F2C2A7A9B330002BBAE /* VoiceViewModel.swift in Sources */,
 				C1106F1A2A7A8C0B0002BBAE /* SelmaVoice.swift in Sources */,
 				C1106F182A7A8C0B0002BBAE /* PodcastVoice.swift in Sources */,
 				C1D207782A80CD9500F56E26 /* VoiceController.swift in Sources */,

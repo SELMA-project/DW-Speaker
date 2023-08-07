@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var voiceManager = VoiceManager()
+    @StateObject var voiceViewModel = VoiceViewModel()
     
     @State var textToSpeak: String = "Hello, my name is Andy."
     
@@ -21,20 +21,20 @@ struct ContentView: View {
                 .background(ignoresSafeAreaEdges: .all)
             
             HStack {
-                Picker("Language:", selection: $voiceManager.selectedLocaleId) {
-                    ForEach(voiceManager.selectableLocales, id: \.identifier) { locale in
+                Picker("Language:", selection: $voiceViewModel.selectedLocaleId) {
+                    ForEach(voiceViewModel.selectableLocales, id: \.identifier) { locale in
                         Text(locale.displayName).tag(locale)
                     }
                 }
                 
-                Picker("Provider:", selection: $voiceManager.selectedProviderId) {
-                    ForEach(voiceManager.selectableProviders, id: \.id) { provider in
+                Picker("Provider:", selection: $voiceViewModel.selectedProviderId) {
+                    ForEach(voiceViewModel.selectableProviders, id: \.id) { provider in
                         Text(provider.displayName).tag(provider.id)
                     }
                 }
                 
-                Picker("Voice:", selection: $voiceManager.selectedVoiceId) {
-                    ForEach(voiceManager.selectableVoices, id: \.id) { voice in
+                Picker("Voice:", selection: $voiceViewModel.selectedVoiceId) {
+                    ForEach(voiceViewModel.selectableVoices, id: \.id) { voice in
                         Text(voice.displayName).tag(voice.id)
                     }
                 }

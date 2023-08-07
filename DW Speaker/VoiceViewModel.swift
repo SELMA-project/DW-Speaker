@@ -1,5 +1,5 @@
 //
-//  VoiceManager.swift
+//  VoiceViewModel.swift
 //  DW Speaker
 //
 //  Created by Andy Giefer on 02.08.23.
@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-class VoiceManager: ObservableObject {
+class VoiceViewModel: ObservableObject {
     
     var voiceController: VoiceController
     
@@ -35,8 +35,7 @@ class VoiceManager: ObservableObject {
                         self.selectedProviderId = firstProvider.id
                     }
                 }
-                
-
+        
             }
         }
     }
@@ -67,17 +66,14 @@ class VoiceManager: ObservableObject {
     
     /// The identifier of the selected voice.
     @Published var selectedVoiceId: String = ""
-    
-
-    
+        
     init() {
         
+        /// Access to voice functionalitites
         self.voiceController = VoiceController()
         
         let selectedLocale = Locale(identifier: "en-US")
         let selectedProvider = AppleVoiceProvider()
-        
-
         
         // set available locales and providers
         Task {
