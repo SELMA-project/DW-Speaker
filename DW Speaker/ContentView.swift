@@ -11,11 +11,12 @@ struct ContentView: View {
     
     @StateObject var voiceViewModel = VoiceViewModel()
     
-    @State var textToSpeak: String = "Hello, my name is Andy."
+    @AppStorage("textToSpeak") var textToSpeak: String = "Hello, my name is Andy."
     
     var body: some View {
         VStack(spacing: 0) {
             TextEditor(text: $textToSpeak)
+                .autocorrectionDisabled(true)
                 .font(.title2)
                 .padding(40)
                 .background(ignoresSafeAreaEdges: .all)
@@ -40,7 +41,7 @@ struct ContentView: View {
                 }
                 
                 Button("Speak") {
-                    print("Speaking")
+                    voiceViewModel.speak(text: textToSpeak)
                 }
                 .buttonStyle(BlueButtonStyle())
             }

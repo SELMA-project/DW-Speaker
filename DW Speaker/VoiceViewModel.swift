@@ -11,7 +11,8 @@ import Foundation
 class VoiceViewModel: ObservableObject {
     
     var voiceController: VoiceController
-    
+    var audioPlayerController: AudioPlayerController
+
     @Published var selectableLocales: [Locale] = []
     @Published var selectableProviders: [VoiceProvider] = []
     @Published var selectableVoices: [Voice] = []
@@ -45,12 +46,11 @@ class VoiceViewModel: ObservableObject {
         didSet {
             
             // after the provider changes, adjust the list of selectable voice and choose the prefered one
-            if let provider = voiceController.provider(forId: selectedProviderId) {
+            if let selectedProvider {
                 Task {
-                    
                     let selectedLocale = Locale(identifier: selectedLocaleId)
-                    let voices = await provider.availableVoicesForLocale(locale: selectedLocale)
-                    let preferedVoice = await provider.preferedVoiceForLocale(locale: selectedLocale)
+                    let voices = await selectedProvider.availableVoicesForLocale(locale: selectedLocale)
+                    let preferedVoice = await selectedProvider.preferedVoiceForLocale(locale: selectedLocale)
                     
                     DispatchQueue.main.async {
                         self.selectableVoices = voices
@@ -67,10 +67,25 @@ class VoiceViewModel: ObservableObject {
     /// The identifier of the selected voice.
     @Published var selectedVoiceId: String = ""
         
+    
+    var selectedProvider: VoiceProvider? {
+        return voiceController.provider(forId: selectedProviderId)
+    }
+    
+    var selectedVoice: Voice? {
+        if let selectedProvider {
+            return selectedProvider.voice(forId: selectedVoiceId)
+        }
+        return nil
+    }
+    
     init() {
         
         /// Access to voice functionalitites
         self.voiceController = VoiceController()
+
+        /// Access to voice functionalitites
+        self.audioPlayerController = AudioPlayerController()
         
         let selectedLocale = Locale(identifier: "en-US")
         let selectedProvider = AppleVoiceProvider()
@@ -91,6 +106,16 @@ class VoiceViewModel: ObservableObject {
         }
     }
     
+    func speak(text: String) {
+        
+        Task {
+            if let selectedVoice {
+                if let audioURL = await voiceController.synthesizeText(text, usingVoice: selectedVoice) {
+                    await audioPlayerController.playAudio(audioUrl: audioURL)
+                }
+            }
+        }
+    }
 
     
 }

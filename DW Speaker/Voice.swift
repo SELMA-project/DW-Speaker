@@ -16,5 +16,5 @@ protocol Voice {
     var displayName: String { get set }
     
     /// Converts the provided text into speech.
-    func synthesizeText(_ text: String) async -> Data?
+    func synthesizeText(_ text: String) async -> URL?
 }

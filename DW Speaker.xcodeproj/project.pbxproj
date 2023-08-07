@@ -23,6 +23,7 @@
 		C1106F282A7A980C0002BBAE /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F272A7A980C0002BBAE /* Voice.swift */; };
 		C1106F2A2A7A999B0002BBAE /* AppleVoiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F292A7A999B0002BBAE /* AppleVoiceProvider.swift */; };
 		C1106F2C2A7A9B330002BBAE /* VoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */; };
+		C13E6E9A2A812175007FCE64 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13E6E992A812175007FCE64 /* AudioPlayerController.swift */; };
 		C16145CA2A7B935B0037AD4B /* Locale+displayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16145C92A7B935B0037AD4B /* Locale+displayName.swift */; };
 		C1D207782A80CD9500F56E26 /* VoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D207772A80CD9500F56E26 /* VoiceController.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		C1106F272A7A980C0002BBAE /* Voice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		C1106F292A7A999B0002BBAE /* AppleVoiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleVoiceProvider.swift; sourceTree = "<group>"; };
 		C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceViewModel.swift; sourceTree = "<group>"; };
+		C13E6E992A812175007FCE64 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
 		C16145C92A7B935B0037AD4B /* Locale+displayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+displayName.swift"; sourceTree = "<group>"; };
 		C1D207772A80CD9500F56E26 /* VoiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +86,7 @@
 				C1106F032A7A7F750002BBAE /* ContentView.swift */,
 				C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */,
 				C1D207772A80CD9500F56E26 /* VoiceController.swift */,
+				C13E6E992A812175007FCE64 /* AudioPlayerController.swift */,
 				C1106F272A7A980C0002BBAE /* Voice.swift */,
 				C1106F252A7A90650002BBAE /* VoiceProvider.swift */,
 				C1106F292A7A999B0002BBAE /* AppleVoiceProvider.swift */,
@@ -205,6 +208,7 @@
 				C1106F1E2A7A8CD10002BBAE /* LanguageManager.swift in Sources */,
 				C1106F222A7A8E070002BBAE /* AudioManager.swift in Sources */,
 				C1106F202A7A8CF00002BBAE /* Constants.swift in Sources */,
+				C13E6E9A2A812175007FCE64 /* AudioPlayerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

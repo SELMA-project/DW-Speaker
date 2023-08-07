@@ -7,7 +7,11 @@
 
 import Foundation
 
+
 class VoiceController {
+    
+
+    
     
     private var availableProviders: [VoiceProvider] = []
     
@@ -71,4 +75,12 @@ class VoiceController {
     func provider(forId providerId: String) -> VoiceProvider? {
         return availableProviders.filter({ $0.id == providerId}).first
     }
+    
+    func synthesizeText(_ text: String, usingVoice voice: Voice) async -> URL? {
+        return await voice.synthesizeText(text)
+
+    }
+    
+ 
+    
 }

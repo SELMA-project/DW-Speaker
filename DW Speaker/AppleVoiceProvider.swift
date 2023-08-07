@@ -11,9 +11,9 @@ import AVFoundation
 struct AppleVoiceProvider: VoiceProvider, Identifiable {
     
     var id = "appleVoiceProvider"
-
+    
     var displayName = "Apple"
-
+    
     func supportedLocales() async -> [Locale] {
         
         // store locales in set to assure uniqueness
@@ -34,7 +34,7 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
         
         return sortedLocales
     }
-
+    
     func availableVoicesForLocale(locale: Locale) async -> [Voice] {
         
         var availableVoices: [AppleVoice] = []
@@ -63,7 +63,7 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
             let identifier = speechVoice.identifier
             let name = speechVoice.name
             let quality = speechVoice.quality
-
+            
             var displayName = "\(name)"
             
             // add quality to the displayName
@@ -123,8 +123,8 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
         let appleVoice = AppleVoice(id: identifier, displayName: displayName, quality: nativeVoice.quality)
         return appleVoice
     }
-
-
+    
+    
 }
 
 struct AppleVoice: Voice {
@@ -134,10 +134,88 @@ struct AppleVoice: Voice {
     
     var quality: AVSpeechSynthesisVoiceQuality
     
-    func synthesizeText(_ text: String) async -> Data? {
-        print("Speaking: \(text)")
-        return nil
+    // setup synthesizer
+    let synthesizer = AVSpeechSynthesizer()
+    
+    func synthesizeText(_ text: String) async -> URL? {
+        
+        // create utterance
+        let utterance = AVSpeechUtterance(string: text)
+        
+        // associate voice
+        let voice = AVSpeechSynthesisVoice(identifier: self.id)
+        utterance.voice = voice
+        
+        // render utterance to audio file
+        let audioURL = await synthesizeUtterance(utterance)
+        
+        return audioURL
     }
     
+
     
+    
+    /// Synthesize text using given voice. Save to file and return its URL.
+    func synthesizeUtterance(_ utterance: AVSpeechUtterance) async -> URL? {
+        
+        await withCheckedContinuation { continuation in
+            
+            // create URL to store the audio in
+            let fileURL = FileManager.default.temporaryDirectory
+                .appendingPathComponent(UUID().uuidString)
+                .appendingPathExtension("wav")
+            
+            // result will be stored here
+            var returnedURL: URL? = nil
+            
+            
+            // Only create new file handle if `output` is nil.
+            var output: AVAudioFile?
+            
+            // for example, see https://stackoverflow.com/questions/25965601/avspeechsynthesizer-output-as-file/58118583#58118583
+            synthesizer.write(utterance) {(buffer: AVAudioBuffer) in
+                
+                guard let pcmBuffer = buffer as? AVAudioPCMBuffer else {
+                    fatalError("unknown buffer type: \(buffer)")
+                }
+                
+                
+                if pcmBuffer.frameLength == 0 {
+                    // Done
+                    
+                    if output != nil {
+                        
+                        // here, we know that we have been successful
+                        returnedURL = fileURL
+                        
+                        // set output AVAudioFile to nil to close it
+                        output = nil
+                        
+                        continuation.resume(returning: returnedURL)
+                    }
+                    
+                    
+                } else {
+                                        
+                    do{
+                        // this closure is called multiple times. so to save a complete audio, try create a file only for once.
+                        if output == nil {
+                            try  output = AVAudioFile(
+                                forWriting: fileURL,
+                                settings: pcmBuffer.format.settings,
+                                commonFormat: .pcmFormatInt16,
+                                interleaved: false)
+                            
+                            //print("pcmBuffer settings: \(pcmBuffer.format.settings)")
+                        }
+                        try output?.write(from: pcmBuffer)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+                
+            }
+        }
+    }
 }
+
