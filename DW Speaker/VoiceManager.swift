@@ -10,6 +10,8 @@ import Foundation
 @MainActor
 class VoiceManager: ObservableObject {
     
+    var voiceController: VoiceController
+    
     @Published var selectableLocales: [Locale] = []
     @Published var selectableProviders: [VoiceProvider] = []
     @Published var selectableVoices: [Voice] = []
@@ -22,7 +24,7 @@ class VoiceManager: ObservableObject {
             let selectedLocale = Locale(identifier: selectedLocaleId)
             Task {
                 
-                let providers = await providers(forLocale: selectedLocale)
+                let providers = await voiceController.providers(forLocale: selectedLocale)
                 DispatchQueue.main.async {
                     
                     // set list of providers
@@ -44,7 +46,7 @@ class VoiceManager: ObservableObject {
         didSet {
             
             // after the provider changes, adjust the list of selectable voice and choose the prefered one
-            if let provider = availableProviders.filter({ $0.id == selectedProviderId}).first {
+            if let provider = voiceController.provider(forId: selectedProviderId) {
                 Task {
                     
                     let selectedLocale = Locale(identifier: selectedLocaleId)
@@ -66,20 +68,21 @@ class VoiceManager: ObservableObject {
     /// The identifier of the selected voice.
     @Published var selectedVoiceId: String = ""
     
-    private var availableProviders: [VoiceProvider] = []
+
     
     init() {
+        
+        self.voiceController = VoiceController()
         
         let selectedLocale = Locale(identifier: "en-US")
         let selectedProvider = AppleVoiceProvider()
         
-        // which providers to we have?
-        self.availableProviders = getAvailableProviders()
+
         
         // set available locales and providers
         Task {
-            let locales = await availableLocales()
-            let providers = await providers(forLocale: selectedLocale)
+            let locales = await voiceController.availableLocales()
+            let providers = await voiceController.providers(forLocale: selectedLocale)
             
             DispatchQueue.main.async {
                 self.selectableLocales = locales
@@ -90,57 +93,6 @@ class VoiceManager: ObservableObject {
                 
             }
         }
-    }
-    
-    /// All available voice providers.
-    private func getAvailableProviders() -> [VoiceProvider] {
-        let appleVoiceProvider = AppleVoiceProvider()
-        
-        return [appleVoiceProvider]
-    }
-    
-    /// All available locales.
-    private func availableLocales() async -> [Locale] {
-        
-        // store locales in set to assure uniqueness
-        var uniqueLocales: Set<Locale> = Set()
-        
-        for provider in availableProviders {
-            let providerLocales = await provider.supportedLocales()
-            uniqueLocales.formUnion(providerLocales)
-        }
-        
-        // sort by identifer while converting to an array
-        let sortedLocales = uniqueLocales.sorted {$0.displayName < $1.displayName}
-        
-        return sortedLocales
-    }
-    
-    /// An array of voice providers that support the given locale.
-    private func providers(forLocale locale: Locale) async  -> [VoiceProvider] {
-
-        // all available providers
-        let availableProviders = availableProviders
-  
-        // prepare result
-        var filteredProviders = [VoiceProvider]()
-        
-        // go through each provider
-        for provider in availableProviders {
-            
-            // which locales does it support?
-            let supportedLocales = await provider.supportedLocales()
-            
-            // if the locale we are looking for amongst the supported locales?
-            if supportedLocales.contains(locale) {
-                
-                // if so, add provider to result and check the next provider
-                filteredProviders.append(provider)
-                break
-            }
-        }
-        
-        return filteredProviders
     }
     
 

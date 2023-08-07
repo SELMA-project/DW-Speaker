@@ -41,12 +41,6 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
         
         let allVoices = AVSpeechSynthesisVoice.speechVoices()
         
-        for voice in allVoices {
-            print(voice)
-        }
-        
-        print("*")
-        
         let speechVoicesForLocale = allVoices.filter {
             
             var keepVoice = true
@@ -61,10 +55,6 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
             if $0.identifier.contains("speech.synthesis") {keepVoice = false}
             
             return keepVoice
-        }
-        
-        for filteredVoice in speechVoicesForLocale {
-            print(filteredVoice)
         }
         
         for speechVoice in speechVoicesForLocale {

@@ -13,7 +13,6 @@ struct ContentView: View {
     
     @State var textToSpeak: String = "Hello, my name is Andy."
     
-    
     var body: some View {
         VStack(spacing: 0) {
             TextEditor(text: $textToSpeak)
