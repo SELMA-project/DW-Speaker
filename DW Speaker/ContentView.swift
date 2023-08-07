@@ -12,13 +12,6 @@ struct ContentView: View {
     @StateObject var voiceManager = VoiceManager()
     
     @State var textToSpeak: String = "Hello, my name is Andy."
-
-
-
-    @State var selectedVoice: Voice = .Andy
-    enum Voice: String, CaseIterable {
-        case Andy, Johann, Alice
-    }
     
     
     var body: some View {
