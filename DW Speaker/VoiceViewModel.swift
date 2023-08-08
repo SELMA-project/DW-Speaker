@@ -67,12 +67,15 @@ class VoiceViewModel: ObservableObject {
     /// The identifier of the selected voice.
     @Published var selectedVoiceId: String = ""
     
+    /// Stores the individual settings for all voices.
     @Published var voiceSettings = VoiceSettings()
     
+    /// The selected Voice Provider.
     var selectedProvider: VoiceProvider? {
         return voiceController.provider(forId: selectedProviderId)
     }
     
+    /// The selected Voice.
     var selectedVoice: Voice? {
         if let selectedProvider {
             return selectedProvider.voice(forId: selectedVoiceId)
@@ -88,6 +91,7 @@ class VoiceViewModel: ObservableObject {
         /// Access to voice functionalitites
         self.audioPlayerController = AudioPlayerController()
         
+        // default locale and provider
         let selectedLocale = Locale(identifier: "en-US")
         let selectedProvider = AppleVoiceProvider()
         

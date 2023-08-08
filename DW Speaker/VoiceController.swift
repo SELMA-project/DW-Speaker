@@ -10,9 +10,6 @@ import Foundation
 
 class VoiceController {
     
-
-    
-    
     private var availableProviders: [VoiceProvider] = []
     
     init() {
@@ -22,9 +19,18 @@ class VoiceController {
     
     /// All available voice providers.
     private func getAvailableProviders() -> [VoiceProvider] {
-        let appleVoiceProvider = AppleVoiceProvider()
         
-        return [appleVoiceProvider]
+        var providers: [VoiceProvider] = []
+        
+        // add apple
+        providers.append(AppleVoiceProvider())
+
+        // add elevenLabs
+        if let elevenLabsProvider = ElevenLabsVoiceProvider() {
+            providers.append(elevenLabsProvider)
+        }
+        
+        return providers
     }
     
     /// All available locales.
@@ -59,12 +65,11 @@ class VoiceController {
             // which locales does it support?
             let supportedLocales = await provider.supportedLocales()
             
-            // if the locale we are looking for amongst the supported locales?
+            // is the locale we are looking for amongst the supported locales?
             if supportedLocales.contains(locale) {
                 
                 // if so, add provider to result and check the next provider
                 filteredProviders.append(provider)
-                break
             }
         }
         
