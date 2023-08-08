@@ -131,34 +131,25 @@ struct AppleVoice: Voice {
     
     var id: String
     var displayName: String
-    var volume : Float = 1.0 // between 0 and 1
+
     
     var quality: AVSpeechSynthesisVoiceQuality
-    
-    /// The baseline pitch the speech synthesizer uses when speaking the utterance.
-    /// Values are between 0.5 and 2.0.
-    var pitchMultiplier: Float = 1.0
-    
-    /// The rate the speech synthesizer uses when speaking the utterance.
-    var rate: Float = AVSpeechUtteranceDefaultSpeechRate
-    let minimumSpeechRate: Float = AVSpeechUtteranceMinimumSpeechRate
-    let maximumSpeechRate: Float = AVSpeechUtteranceMaximumSpeechRate
-    
-    /// The amount of time the speech synthesizer pauses before speaking the utterance.
-    var preUtteranceDelay: TimeInterval = 0.0
-
-    /// The amount of time the speech synthesizer pauses after speaking an utterance before handling the next utterance in the queue.
-    var postUtteranceDelay: TimeInterval = 0.0
     
     // setup synthesizer
     private let synthesizer = AVSpeechSynthesizer()
 
     
-    
-    func synthesizeText(_ text: String) async -> URL? {
+    func synthesizeText(_ text: String, settings: VoiceSettings) async -> URL? {
         
         // create utterance
         let utterance = AVSpeechUtterance(string: text)
+        
+        // apply settings
+        utterance.pitchMultiplier = settings.apple.pitchMultiplier
+        utterance.volume = settings.apple.volume
+        utterance.rate = settings.apple.rate
+        utterance.preUtteranceDelay = settings.apple.preUtteranceDelay
+        utterance.postUtteranceDelay = settings.apple.postUtteranceDelay
         
         // associate voice
         let voice = AVSpeechSynthesisVoice(identifier: self.id)
@@ -235,5 +226,29 @@ struct AppleVoice: Voice {
             }
         }
     }
+}
+
+
+    
+struct AppleVoiceSettings {
+    
+    /// The volume of the spoken utterance.  Range is etween 0 and 1.
+    var volume : Float = 1.0
+    
+    /// The baseline pitch the speech synthesizer uses when speaking the utterance.
+    /// Values are between 0.5 and 2.0.
+    var pitchMultiplier: Float = 1.0
+    
+    /// The rate the speech synthesizer uses when speaking the utterance.
+    var rate: Float = AVSpeechUtteranceDefaultSpeechRate
+    let minimumSpeechRate: Float = AVSpeechUtteranceMinimumSpeechRate
+    let maximumSpeechRate: Float = AVSpeechUtteranceMaximumSpeechRate
+    
+    /// The amount of time the speech synthesizer pauses before speaking the utterance.
+    var preUtteranceDelay: TimeInterval = 0.0
+    
+    /// The amount of time the speech synthesizer pauses after speaking an utterance before handling the next utterance in the queue.
+    var postUtteranceDelay: TimeInterval = 0.0
+    
 }
 

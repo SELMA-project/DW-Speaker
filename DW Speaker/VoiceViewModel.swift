@@ -66,7 +66,8 @@ class VoiceViewModel: ObservableObject {
     
     /// The identifier of the selected voice.
     @Published var selectedVoiceId: String = ""
-        
+    
+    @Published var voiceSettings = VoiceSettings()
     
     var selectedProvider: VoiceProvider? {
         return voiceController.provider(forId: selectedProviderId)
@@ -78,7 +79,7 @@ class VoiceViewModel: ObservableObject {
         }
         return nil
     }
-    
+        
     init() {
         
         /// Access to voice functionalitites
@@ -110,13 +111,12 @@ class VoiceViewModel: ObservableObject {
         
         Task {
             if let selectedVoice {
-                if let audioURL = await voiceController.synthesizeText(text, usingVoice: selectedVoice) {
+                if let audioURL = await voiceController.synthesizeText(text, usingVoice: selectedVoice, settings: voiceSettings) {
                     await audioPlayerController.playAudio(audioUrl: audioURL)
                 }
             }
         }
     }
-
     
 }
 

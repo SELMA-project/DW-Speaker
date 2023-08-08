@@ -76,9 +76,8 @@ class VoiceController {
         return availableProviders.filter({ $0.id == providerId}).first
     }
     
-    func synthesizeText(_ text: String, usingVoice voice: Voice) async -> URL? {
-        return await voice.synthesizeText(text)
-
+    func synthesizeText(_ text: String, usingVoice voice: Voice, settings: VoiceSettings) async -> URL? {
+        return await voice.synthesizeText(text, settings: settings)
     }
     
  

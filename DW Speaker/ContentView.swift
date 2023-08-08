@@ -14,38 +14,56 @@ struct ContentView: View {
     @AppStorage("textToSpeak") var textToSpeak: String = "Hello, my name is Andy."
     
     var body: some View {
-        VStack(spacing: 0) {
+                
+        HStack(spacing: 0) {
             TextEditor(text: $textToSpeak)
                 .autocorrectionDisabled(true)
                 .font(.title2)
                 .padding(40)
                 .background(ignoresSafeAreaEdges: .all)
             
-            HStack {
-                Picker("Language:", selection: $voiceViewModel.selectedLocaleId) {
-                    ForEach(voiceViewModel.selectableLocales, id: \.identifier) { locale in
-                        Text(locale.displayName).tag(locale)
+            VStack {
+                Form {
+                    Picker("Language:", selection: $voiceViewModel.selectedLocaleId) {
+                        ForEach(voiceViewModel.selectableLocales, id: \.identifier) { locale in
+                            Text(locale.displayName).tag(locale)
+                        }
                     }
+                    
+                    Picker("Provider:", selection: $voiceViewModel.selectedProviderId) {
+                        ForEach(voiceViewModel.selectableProviders, id: \.id) { provider in
+                            Text(provider.displayName).tag(provider.id)
+                        }
+                    }
+                    
+                    Picker("Voice:", selection: $voiceViewModel.selectedVoiceId) {
+                        ForEach(voiceViewModel.selectableVoices, id: \.id) { voice in
+                            Text(voice.displayName).tag(voice.id)
+                        }
+                    }.padding(.bottom, 16)
+                    
+                    AppleVoiceSettingsView()
+                        .environmentObject(voiceViewModel)
                 }
                 
-                Picker("Provider:", selection: $voiceViewModel.selectedProviderId) {
-                    ForEach(voiceViewModel.selectableProviders, id: \.id) { provider in
-                        Text(provider.displayName).tag(provider.id)
-                    }
-                }
+
+                              
+                Spacer()
                 
-                Picker("Voice:", selection: $voiceViewModel.selectedVoiceId) {
-                    ForEach(voiceViewModel.selectableVoices, id: \.id) { voice in
-                        Text(voice.displayName).tag(voice.id)
-                    }
-                }
-                
-                Button("Speak") {
+                Button {
                     voiceViewModel.speak(text: textToSpeak)
+                } label: {
+                    Text("Speak")
+                        .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(BlueButtonStyle())
+                
             }
             .padding()
+            .frame(width: 300)
+     
+    
+            
 
         }
         
