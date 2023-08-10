@@ -10,4 +10,5 @@ import Foundation
 /// Add Settings for all providers to this struct.
 struct VoiceSettings {
     var apple = AppleVoiceSettings()
+    var elevenLabs = ElevenLabsVoiceSettings()
 }

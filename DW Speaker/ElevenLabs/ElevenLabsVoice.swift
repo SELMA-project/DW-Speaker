@@ -21,10 +21,21 @@ struct ElevenLabsVoice: Voice {
     var gender: String?
     var useCase: String?
     
-    
+    let voiceManager: ElevenLabsVoiceManager
     
     func synthesizeText(_ text: String, settings: VoiceSettings) async -> URL? {
-        return nil
+    
+        // early return if there is no text
+        guard text.count > 0 else {return nil}
+        
+        // create URL to store the audio in
+        let audioURL = FileManager.temporaryAudioUrl()
+        
+        let success = await voiceManager.renderSpeech(voiceId: self.id, text: text, toURL: audioURL, stability: settings.elevenLabs.stability, similarityBoost: settings.elevenLabs.similarityBoost)
+        
+        print("\(success ? "Success" : "Error"). Audio data written to \(audioURL)")
+        
+        return success ? audioURL : nil
     }
     
 }

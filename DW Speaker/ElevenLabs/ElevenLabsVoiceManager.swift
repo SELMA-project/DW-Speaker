@@ -30,7 +30,7 @@ class ElevenLabsVoiceManager {
     enum EndPoint {
         case models
         case voices
-        case textToSpeech(voiceId: String, text: String, stability: Double, similarityBoost: Double)
+        case textToSpeech(voiceId: String, text: String, modelId: String, stability: Double, similarityBoost: Double)
         
         var value: String {
             switch self {
@@ -38,7 +38,7 @@ class ElevenLabsVoiceManager {
                 return "models"
             case .voices:
                 return "voices"
-            case .textToSpeech(let voiceId, _, _ , _):
+            case .textToSpeech(let voiceId, _, _ , _, _):
                 return "text-to-speech/\(voiceId)"
             }
         }
@@ -51,27 +51,21 @@ class ElevenLabsVoiceManager {
 // Public
 extension ElevenLabsVoiceManager {
     
-    func renderSpeech(voiceIdentifier: String, text: String, toURL fileURL: URL, stability: Double, similarityBoost: Double) async -> Bool {
+    func renderSpeech(voiceId: String, text: String, toURL fileURL: URL, stability: Double, similarityBoost: Double) async -> Bool {
         
-        // early exit if the voice does not exist
-        guard let voiceId = await voiceId(forName: voiceIdentifier) else {
-            print("VoiceId \(voiceIdentifier) does not exist")
-            return false
-        }
-        
-        print("Id for name \(voiceIdentifier): \(voiceId)")
-
         // create TTS endpoint
-        let endPoint = EndPoint.textToSpeech(voiceId: voiceId, text: text, stability: stability, similarityBoost: similarityBoost)
+        let endPoint = EndPoint.textToSpeech(voiceId: voiceId, text: text, modelId: self.elevenLabsModelId, stability: stability, similarityBoost: similarityBoost)
         
         // convert to request
         let urlRequest = urlRequest(forEndPoint: endPoint)
         
-        // defualt reult: fail
+        // defualt result: fail
         var success = false
         
         // download audio
         if let voiceData = await downloadData(forUrlRequest: urlRequest) {
+            
+            //print(String(data: voiceData, encoding: .utf8) ?? "")
             
             do {
                 try voiceData.write(to: fileURL, options: .atomic)
@@ -313,7 +307,7 @@ extension ElevenLabsVoiceManager {
                 "application/json",
                 forHTTPHeaderField: "accept"
             )
-        case .textToSpeech( _, let text, let stability, let similarityBoost):
+        case .textToSpeech( _, let text, let modelId, let stability, let similarityBoost):
             
             // -H 'accept: audio/mpeg' \
             request.setValue(
@@ -329,6 +323,7 @@ extension ElevenLabsVoiceManager {
             
             // Serialize HTTP Body data as JSON
             let body: [String: Any] = ["text": text,
+                                       "model_id": modelId,
                                        "voice_settings": [
                                         "stability": stability,
                                         "similarity_boost": similarityBoost

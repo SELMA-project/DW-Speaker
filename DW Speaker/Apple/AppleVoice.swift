@@ -51,9 +51,7 @@ struct AppleVoice: Voice {
         await withCheckedContinuation { continuation in
             
             // create URL to store the audio in
-            let fileURL = FileManager.default.temporaryDirectory
-                .appendingPathComponent(UUID().uuidString)
-                .appendingPathExtension("wav")
+            let fileURL = FileManager.temporaryAudioUrl()
             
             // result will be stored here
             var returnedURL: URL? = nil
@@ -108,3 +106,4 @@ struct AppleVoice: Voice {
         }
     }
 }
+
