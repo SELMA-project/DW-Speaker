@@ -36,13 +36,19 @@ class VoiceController {
     /// All available locales.
     func availableLocales() async -> [Locale] {
         
+        
+        
+        
         // store locales in set to assure uniqueness
-        var uniqueLocales: Set<Locale> = Set()
+        var uniqueLocaleIds: Set<String> = Set()
         
         for provider in availableProviders {
-            let providerLocales = await provider.supportedLocales()
-            uniqueLocales.formUnion(providerLocales)
+            let providerLocaleIds = await provider.supportedLocales().map({ $0.identifier })
+            uniqueLocaleIds.formUnion(providerLocaleIds)
         }
+        
+        // create locales from ids
+        let uniqueLocales = uniqueLocaleIds.map( {Locale(identifier: $0)} )
         
         // sort by identifer while converting to an array
         let sortedLocales = uniqueLocales.sorted {$0.displayName < $1.displayName}
@@ -66,7 +72,7 @@ class VoiceController {
             let supportedLocales = await provider.supportedLocales()
             
             // is the locale we are looking for amongst the supported locales?
-            if supportedLocales.contains(locale) {
+            if supportedLocales.filter({$0.identifier == locale.identifier}).count > 0 {
                 
                 // if so, add provider to result and check the next provider
                 filteredProviders.append(provider)

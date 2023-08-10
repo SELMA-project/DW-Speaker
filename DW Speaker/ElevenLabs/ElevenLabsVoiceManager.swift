@@ -143,16 +143,15 @@ extension ElevenLabsVoiceManager {
         
         var locale: Locale {
             // default: no country code
-            var result = Locale(languageComponents: .init(identifier: self.languageId))
+            var result = Locale(identifier: self.languageId)
             
-            // add country code where possible
-            if languageId == "en" {result = Locale(identifier: "en-US")}
+            // overwrite to add country code if only language is specified
             if languageId == "de" {result = Locale(identifier: "de-DE")}
             if languageId == "pl" {result = Locale(identifier: "pl-PL")}
             if languageId == "es" {result = Locale(identifier: "es-ES")}
             if languageId == "fr" {result = Locale(identifier: "fr-FR")}
             if languageId == "it" {result = Locale(identifier: "it-IT")}
-            if languageId == "pt" {result = Locale(identifier: "pt-BR")}
+            if languageId == "pt" {result = Locale(identifier: "pt-PT")}
             if languageId == "hi" {result = Locale(identifier: "hi-IN")}
             
             return result
@@ -176,7 +175,7 @@ extension ElevenLabsVoiceManager {
                 
                 // decode JSON
                 let models = try JSONDecoder().decode([ModelQueryReply].self, from: data)
-                
+                                
                 return models
                 
             } catch {
