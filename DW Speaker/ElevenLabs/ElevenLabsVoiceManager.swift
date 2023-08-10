@@ -12,6 +12,7 @@ class ElevenLabsVoiceManager {
     
     let apiKey: String
     let apiVersion = "v1"
+    let elevenLabsModelId = "eleven_multilingual_v1" // eleven_monolingual_v1
     
     /// Cache for all downloaded voices
     private var availableVoices: [NativeVoice] = []
@@ -105,7 +106,7 @@ extension ElevenLabsVoiceManager {
         }
         
         // get multilingual one
-        if let multiLingualModel = availableModels.first(where: { $0.modelId ==  "eleven_multilingual_v1"}) {
+        if let multiLingualModel = availableModels.first(where: { $0.modelId == elevenLabsModelId}) {
             
             for elevenLabsLanguage in multiLingualModel.languages {
                 result.append(elevenLabsLanguage.locale)
