@@ -75,7 +75,7 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
             availableVoices.append(appleVoice)
         }
         
-        // sort by name
+        // sort by quality and name
         let sortedAvailableVoices = availableVoices.sorted { (lhs, rhs) in
             if lhs.quality.rawValue == rhs.quality.rawValue {
                 return lhs.displayName < rhs.displayName

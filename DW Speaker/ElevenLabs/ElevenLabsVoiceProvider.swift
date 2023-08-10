@@ -83,8 +83,17 @@ struct ElevenLabsVoiceProvider: VoiceProvider, Identifiable {
             result.append(elevenLabsVoice)
         }
         
+        // sort by category and name
+        let sortedAvailableVoices = result.sorted { (lhs, rhs) in
+            if lhs.category == rhs.category {
+                return lhs.displayName < rhs.displayName
+            }
+            
+            return lhs.category < rhs.category
+            
+        }
         
-        return result
+        return sortedAvailableVoices
     }
     
     func preferedVoiceForLocale(locale: Locale) async -> Voice? {
