@@ -113,7 +113,7 @@ struct AppleVoiceProvider: VoiceProvider, Identifiable {
     }
     
     
-    func voice(forId voiceId: String) -> Voice {
+    func voice(forId voiceId: String) async -> Voice? {
         let nativeVoice = AVSpeechSynthesisVoice(identifier: voiceId)!
         
         // convert to AppleVoice

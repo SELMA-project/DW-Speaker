@@ -75,13 +75,7 @@ class VoiceViewModel: ObservableObject {
         return voiceController.provider(forId: selectedProviderId)
     }
     
-    /// The selected Voice.
-    var selectedVoice: Voice? {
-        if let selectedProvider {
-            return selectedProvider.voice(forId: selectedVoiceId)
-        }
-        return nil
-    }
+
         
     init() {
         
@@ -112,9 +106,9 @@ class VoiceViewModel: ObservableObject {
     }
     
     func speak(text: String) {
-        
+
         Task {
-            if let selectedVoice {
+            if let selectedVoice = await selectedProvider?.voice(forId: selectedVoiceId) {
                 if let audioURL = await voiceController.synthesizeText(text, usingVoice: selectedVoice, settings: voiceSettings) {
                     await audioPlayerController.playAudio(audioUrl: audioURL)
                 }

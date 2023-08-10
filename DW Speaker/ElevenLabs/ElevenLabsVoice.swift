@@ -12,6 +12,17 @@ struct ElevenLabsVoice: Voice {
     
     var displayName: String
     
+    var nativeName: String
+    var category: String // premade
+    
+    var accent: String?
+    var description: String?
+    var age: String?
+    var gender: String?
+    var useCase: String?
+    
+    
+    
     func synthesizeText(_ text: String, settings: VoiceSettings) async -> URL? {
         return nil
     }

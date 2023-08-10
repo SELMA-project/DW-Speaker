@@ -14,7 +14,7 @@ class ElevenLabsVoiceManager {
     let apiVersion = "v1"
     
     /// Cache for all downloaded voices
-    private var availableVoices: [Voice] = []
+    private var availableVoices: [NativeVoice] = []
 
     /// Cache of all downloaded models
     private var availableModels: [ModelQueryReply] = []
@@ -85,7 +85,7 @@ extension ElevenLabsVoiceManager {
     
     /// Downloads an array of available ElevenLabs Voices and returns it.
     /// - Returns: An array of available ElevenLabs Voices.
-    func nativeVoices() async -> [Voice] {
+    func nativeVoices() async -> [NativeVoice] {
         
         // download the voices if we haven't done so yet
         if availableVoices.count == 0 {
@@ -153,7 +153,7 @@ extension ElevenLabsVoiceManager {
             if languageId == "fr" {result = Locale(identifier: "fr-FR")}
             if languageId == "it" {result = Locale(identifier: "it-IT")}
             if languageId == "pt" {result = Locale(identifier: "pt-BR")}
-            if languageId == "hi" {result = Locale(identifier: "hi-HI")}
+            if languageId == "hi" {result = Locale(identifier: "hi-IN")}
             
             return result
         }
@@ -190,18 +190,40 @@ extension ElevenLabsVoiceManager {
 }
 
 
-// Everything with voices
+// MARK: Everything with voices
 extension ElevenLabsVoiceManager {
     
     
     struct VoiceQueryReply: Codable {
-        var voices: [Voice]
+        var voices: [NativeVoice]
     }
     
     // Andy's voiceId: abFX3QerypeGEFi0PDcz
-    struct Voice: Codable {
-        var voice_id: String
+    struct NativeVoice: Codable {
+        var voiceId: String
         var name: String
+        var category: String // premade
+        var labels: Labels
+        
+        enum CodingKeys: String, CodingKey {
+            case voiceId = "voice_id"
+            case name, category, labels
+        }
+    }
+    /*
+     \"labels\":{\"accent\":\"american\",\"description\":\"soft\",\"age\":\"young\",\"gender\":\"female\",\"use case\":\"narration\"}
+     */
+    struct Labels: Codable {
+        var accent: String?
+        var description: String?
+        var age: String?
+        var gender: String?
+        var useCase: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case useCase = "use case"
+            case accent, description, age, gender
+        }
     }
     
     private func voiceId(forName name: String) async -> String? {
@@ -213,14 +235,14 @@ extension ElevenLabsVoiceManager {
         
         // return the id for given name (if there is a match)
         if let voice = self.availableVoices.first(where: {$0.name == name}) {
-            return voice.voice_id
+            return voice.voiceId
         }
         
         // fallback - no match
         return nil
     }
     
-    private func downloadVoices() async -> [Voice] {
+    private func downloadVoices() async -> [NativeVoice] {
         
         print("Downloading voices")
         
@@ -229,6 +251,8 @@ extension ElevenLabsVoiceManager {
         
         // download
         if let data = await downloadData(forUrlRequest:urlRequest) {
+            
+            //print(String(data: data, encoding: .utf8)!)
             
             do {
                 // decode JSON

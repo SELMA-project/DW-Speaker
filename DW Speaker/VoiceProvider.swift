@@ -24,7 +24,7 @@ protocol VoiceProvider {
     /// The provider's preferred voice for the given locale
     func preferedVoiceForLocale(locale: Locale) async -> Voice?
     
-    func voice(forId voiceId: String) -> Voice
+    func voice(forId voiceId: String) async -> Voice?
     
 
 }
