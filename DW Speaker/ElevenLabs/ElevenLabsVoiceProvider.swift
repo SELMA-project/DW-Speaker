@@ -21,7 +21,7 @@ struct ElevenLabsVoiceProvider: VoiceProvider, Identifiable {
     init?(apiKey: String? = nil) {
         
         if let keyToUse = apiKey ?? ProcessInfo.processInfo.environment["elevenLabsAPIKey"] {
-            elevenLabsVoiceManager = ElevenLabsVoiceManager(apiKey: keyToUse)
+            elevenLabsVoiceManager = ElevenLabsVoiceManager(apiKey: keyToUse, elevenLabsModelId: .multilingualV1)
         } else {
             return nil
         }

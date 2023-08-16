@@ -12,19 +12,32 @@ class ElevenLabsVoiceManager {
     
     let apiKey: String
     let apiVersion = "v1"
-    let elevenLabsModelId = "eleven_multilingual_v1" // eleven_monolingual_v1
-    
+    let elevenLabsModelId: ElevenLabsModelID
     /// Cache for all downloaded voices
     private var availableVoices: [NativeVoice] = []
 
     /// Cache of all downloaded models
     private var availableModels: [ModelQueryReply] = []
     
+    enum ElevenLabsModelID {
+        case monolingualV1, multilingualV1
+        
+        var stringValue: String {
+            switch self {
+            case .monolingualV1:
+                return "eleven_monolingual_v1"
+            case .multilingualV1:
+                return "eleven_multilingual_v1"
+            }
+        }
+    }
+    
     /// Initializes the ElevenLabs voice manager.
     /// - Parameters:
     ///   - apiKey: The API key to use.
-    init(apiKey: String) {
+    init(apiKey: String, elevenLabsModelId: ElevenLabsModelID) {
         self.apiKey = apiKey
+        self.elevenLabsModelId = elevenLabsModelId
     }
         
     enum EndPoint {
@@ -54,7 +67,7 @@ extension ElevenLabsVoiceManager {
     func renderSpeech(voiceId: String, text: String, toURL fileURL: URL, stability: Double, similarityBoost: Double) async -> Bool {
         
         // create TTS endpoint
-        let endPoint = EndPoint.textToSpeech(voiceId: voiceId, text: text, modelId: self.elevenLabsModelId, stability: stability, similarityBoost: similarityBoost)
+        let endPoint = EndPoint.textToSpeech(voiceId: voiceId, text: text, modelId: self.elevenLabsModelId.stringValue, stability: stability, similarityBoost: similarityBoost)
         
         // convert to request
         let urlRequest = urlRequest(forEndPoint: endPoint)
@@ -100,7 +113,7 @@ extension ElevenLabsVoiceManager {
         }
         
         // get multilingual one
-        if let multiLingualModel = availableModels.first(where: { $0.modelId == elevenLabsModelId}) {
+        if let multiLingualModel = availableModels.first(where: { $0.modelId == elevenLabsModelId.stringValue}) {
             
             for elevenLabsLanguage in multiLingualModel.languages {
                 result.append(elevenLabsLanguage.locale)
