@@ -42,7 +42,7 @@ struct ContentView: View {
                         }
                     }.padding(.bottom, 16)
                     
-                    AppleVoiceSettingsView()
+                    VoiceSettingsView()
                         .environmentObject(voiceViewModel)
                 }
                 

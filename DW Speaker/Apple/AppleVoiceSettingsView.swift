@@ -65,15 +65,13 @@ struct AppleVoiceSettingsView: View {
     
     var body: some View {
 
-        VStack {
-            Form {
-                volumeSlider
-                pitchSlider
-                rateSlider
-            }
+        Form {
+            volumeSlider
+            pitchSlider
+            rateSlider
             //preUtteranceDelaySlider
             //postUtteranceDelaySlider
-    
+                
         }
         
     }
