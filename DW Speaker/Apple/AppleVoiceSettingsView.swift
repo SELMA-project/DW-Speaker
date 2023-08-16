@@ -19,7 +19,7 @@ struct AppleVoiceSettingsView: View {
                 Text("Volume:")
             }
             Text("\(voiceViewModel.voiceSettings.apple.volume.formatted(.number.precision(.fractionLength(1))))")
-                .frame(width:30, alignment: .trailing)
+                //.frame(width:30, alignment: .trailing)
         }
     }
     
@@ -29,7 +29,7 @@ struct AppleVoiceSettingsView: View {
                 Text("Pitch:")
             }
             Text("\(voiceViewModel.voiceSettings.apple.pitchMultiplier.formatted(.number.precision(.fractionLength(1))))")
-                .frame(width:30, alignment: .trailing)
+                //.frame(width:30, alignment: .trailing)
         }
     }
     
