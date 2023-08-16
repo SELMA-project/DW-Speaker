@@ -130,5 +130,60 @@ class VoiceViewModel: ObservableObject {
         audioPlayerController.stopAudio()
     }
     
+    
+    func audioURL(fromText text: String) async -> URL?  {
+
+        var result: URL?
+        
+        if let selectedVoice = await selectedProvider?.voice(forId: selectedVoiceId) {
+        
+            playerStatus = .rendering
+            
+            if let audioURL = await voiceController.synthesizeText(text, usingVoice: selectedVoice, settings: voiceSettings) {
+                result = audioURL
+            }
+        }
+        
+        playerStatus = .idle
+        
+        return result
+        
+    }
+    
+    func render(text: String, toURL destinationURL: URL) async {
+        
+        if let selectedVoice = await selectedProvider?.voice(forId: selectedVoiceId) {
+        
+            playerStatus = .rendering
+            
+            if let tempURL = await voiceController.synthesizeText(text, usingVoice: selectedVoice, settings: voiceSettings) {
+                try? FileManager.default.moveItem(at: tempURL, to: destinationURL)
+            }
+            
+            playerStatus = .idle
+        }
+    }
+    
+//    func audioFile(fromText text: String) async -> AudioFile?  {
+//
+//        var audioFile: AudioFile?
+//
+//        if let selectedVoice = await selectedProvider?.voice(forId: selectedVoiceId) {
+//
+//            playerStatus = .rendering
+//
+//            if let audioURL = await voiceController.synthesizeText(text, usingVoice: selectedVoice, settings: voiceSettings) {
+//                if let audioData = try? Data(contentsOf: audioURL) {
+//                    audioFile = AudioFile(data: audioData)
+//                }
+//            }
+//        }
+//
+//        playerStatus = .idle
+//
+//        return audioFile
+//
+//    }
+
 }
 

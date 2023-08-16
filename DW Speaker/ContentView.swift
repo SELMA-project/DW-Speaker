@@ -13,8 +13,24 @@ struct ContentView: View {
     
     @AppStorage("textToSpeak") var textToSpeak: String = "Hello, my name is Andy."
     
+    func showSavePanel() -> URL? {
+        let savePanel = NSSavePanel()
+        savePanel.allowedContentTypes = [.audio]
+        savePanel.canCreateDirectories = true
+        savePanel.isExtensionHidden = false
+        savePanel.allowsOtherFileTypes = false
+        savePanel.title = "Save your audio"
+        savePanel.message = "Choose a folder and a name to store your audio."
+        savePanel.nameFieldLabel = "File name:"
+        savePanel.nameFieldStringValue = "audio.wav"
+        
+        let response = savePanel.runModal()
+        return response == .OK ? savePanel.url : nil
+    }
+
     var body: some View {
-                
+            
+        
         HStack(spacing: 0) {
             TextEditor(text: $textToSpeak)
                 .autocorrectionDisabled(true)
@@ -50,29 +66,42 @@ struct ContentView: View {
                               
                 Spacer()
                 
-                Button {
-                    if voiceViewModel.playerStatus == .idle {
-                        voiceViewModel.speak(text: textToSpeak)
+                HStack {
+                    Button {
+                        if voiceViewModel.playerStatus == .idle {
+                            voiceViewModel.speak(text: textToSpeak)
+                        }
+                        
+                        if voiceViewModel.playerStatus == .playing {
+                            voiceViewModel.stopSpeaking()
+                        }
+                        
+                    } label: {
+                        Text(voiceViewModel.playerStatus == .idle ? "Speak" : "Stop")
+                            .frame(maxWidth: .infinity)
                     }
+                    //.buttonStyle(BlueButtonStyle())
+                    .disabled(voiceViewModel.playerStatus == .rendering)
                     
-                    if voiceViewModel.playerStatus == .playing {
-                        voiceViewModel.stopSpeaking()
+                    Button {
+                        
+                        if let url = showSavePanel() {
+                            Task {
+                                await voiceViewModel.render(text: textToSpeak, toURL: url)
+                            }
+                        }
+                                                
+                    } label: {
+                        Image(systemName: "square.and.arrow.down.fill")
                     }
+ 
+
                     
-                } label: {
-                    Text(voiceViewModel.playerStatus == .idle ? "Speak" : "Stop")
-                        .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(BlueButtonStyle())
-                .disabled(voiceViewModel.playerStatus == .rendering)
-                
             }
             .padding()
             .frame(width: 300)
      
-    
-            
-
         }
         
     }
