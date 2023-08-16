@@ -85,6 +85,7 @@
 				C1106F292A7A999B0002BBAE /* AppleVoiceProvider.swift */,
 				C10687022A82739200ED796D /* AppleVoice.swift */,
 				C10687052A8273B700ED796D /* AppleVoiceSettings.swift */,
+				C10686FC2A822E6F00ED796D /* AppleVoiceSettingsView.swift */,
 			);
 			path = Apple;
 			sourceTree = "<group>";
@@ -121,7 +122,6 @@
 			children = (
 				C1106F012A7A7F750002BBAE /* DW_SpeakerApp.swift */,
 				C1106F032A7A7F750002BBAE /* ContentView.swift */,
-				C10686FC2A822E6F00ED796D /* AppleVoiceSettingsView.swift */,
 				C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */,
 				C1D207772A80CD9500F56E26 /* VoiceController.swift */,
 				C13E6E992A812175007FCE64 /* AudioPlayerController.swift */,
