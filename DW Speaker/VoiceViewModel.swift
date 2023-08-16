@@ -16,6 +16,7 @@ class VoiceViewModel: ObservableObject {
     @Published var selectableLocales: [Locale] = []
     @Published var selectableProviders: [VoiceProvider] = []
     @Published var selectableVoices: [Voice] = []
+
     
     /// The identifier of the selected language.
     @Published var selectedLocaleId: String = "" {
@@ -75,7 +76,11 @@ class VoiceViewModel: ObservableObject {
         return voiceController.provider(forId: selectedProviderId)
     }
     
-
+    enum PlayerStatus {
+        case idle, rendering, playing
+    }
+    
+    @Published var playerStatus: PlayerStatus = .idle
         
     init() {
         
@@ -109,11 +114,20 @@ class VoiceViewModel: ObservableObject {
 
         Task {
             if let selectedVoice = await selectedProvider?.voice(forId: selectedVoiceId) {
+                
+                playerStatus = .rendering
+                
                 if let audioURL = await voiceController.synthesizeText(text, usingVoice: selectedVoice, settings: voiceSettings) {
+                    playerStatus = .playing
                     await audioPlayerController.playAudio(audioUrl: audioURL)
+                    playerStatus = .idle
                 }
             }
         }
+    }
+    
+    func stopSpeaking() {
+        audioPlayerController.stopAudio()
     }
     
 }

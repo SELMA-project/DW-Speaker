@@ -51,12 +51,20 @@ struct ContentView: View {
                 Spacer()
                 
                 Button {
-                    voiceViewModel.speak(text: textToSpeak)
+                    if voiceViewModel.playerStatus == .idle {
+                        voiceViewModel.speak(text: textToSpeak)
+                    }
+                    
+                    if voiceViewModel.playerStatus == .playing {
+                        voiceViewModel.stopSpeaking()
+                    }
+                    
                 } label: {
-                    Text("Speak")
+                    Text(voiceViewModel.playerStatus == .idle ? "Speak" : "Stop")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(BlueButtonStyle())
+                .disabled(voiceViewModel.playerStatus == .rendering)
                 
             }
             .padding()
