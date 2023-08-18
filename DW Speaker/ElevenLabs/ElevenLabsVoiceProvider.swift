@@ -10,7 +10,7 @@ import Foundation
 struct ElevenLabsVoiceProvider: VoiceProvider, Identifiable {
 
     
-    var id = "elevenLabs"
+    var id = "elevenLabsVoiceProvider"
     var displayName = "ElevenLabs"
     
     /// The manager that give access to the ElevenLabs API.

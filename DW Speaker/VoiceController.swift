@@ -30,6 +30,9 @@ class VoiceController {
             providers.append(elevenLabsProvider)
         }
         
+        // add selma
+        providers.append(SelmaVoiceProvider())
+        
         return providers
     }
     

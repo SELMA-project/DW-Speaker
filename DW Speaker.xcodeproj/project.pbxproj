@@ -23,7 +23,7 @@
 		C1106F172A7A8C0B0002BBAE /* VoiceManagerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F122A7A8C0B0002BBAE /* VoiceManagerOld.swift */; };
 		C1106F182A7A8C0B0002BBAE /* PodcastVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F132A7A8C0B0002BBAE /* PodcastVoice.swift */; };
 		C1106F192A7A8C0B0002BBAE /* AppleSpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F142A7A8C0B0002BBAE /* AppleSpeechManager.swift */; };
-		C1106F1A2A7A8C0B0002BBAE /* SelmaVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F152A7A8C0B0002BBAE /* SelmaVoice.swift */; };
+		C1106F1A2A7A8C0B0002BBAE /* SelmaVoiceImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F152A7A8C0B0002BBAE /* SelmaVoiceImport.swift */; };
 		C1106F1E2A7A8CD10002BBAE /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F1D2A7A8CD10002BBAE /* LanguageManager.swift */; };
 		C1106F202A7A8CF00002BBAE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F1F2A7A8CF00002BBAE /* Constants.swift */; };
 		C1106F222A7A8E070002BBAE /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F212A7A8E070002BBAE /* AudioManager.swift */; };
@@ -33,6 +33,9 @@
 		C1106F2C2A7A9B330002BBAE /* VoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */; };
 		C13E6E9A2A812175007FCE64 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13E6E992A812175007FCE64 /* AudioPlayerController.swift */; };
 		C148C5372A8D17FF001FA256 /* AudioFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148C5362A8D17FF001FA256 /* AudioFile.swift */; };
+		C148C53A2A8FAFE2001FA256 /* SelmaVoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148C5392A8FAFE2001FA256 /* SelmaVoiceManager.swift */; };
+		C148C53C2A8FB067001FA256 /* SelmaVoiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148C53B2A8FB067001FA256 /* SelmaVoiceProvider.swift */; };
+		C148C53F2A8FB1A3001FA256 /* SelmaVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148C53E2A8FB1A3001FA256 /* SelmaVoice.swift */; };
 		C15590722A8D082900269CE9 /* ElevenLabsVoiceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15590712A8D082900269CE9 /* ElevenLabsVoiceSettingsView.swift */; };
 		C15590742A8D096700269CE9 /* VoiceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15590732A8D096700269CE9 /* VoiceSettingsView.swift */; };
 		C16145CA2A7B935B0037AD4B /* Locale+displayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16145C92A7B935B0037AD4B /* Locale+displayName.swift */; };
@@ -58,7 +61,7 @@
 		C1106F122A7A8C0B0002BBAE /* VoiceManagerOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceManagerOld.swift; sourceTree = "<group>"; };
 		C1106F132A7A8C0B0002BBAE /* PodcastVoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastVoice.swift; sourceTree = "<group>"; };
 		C1106F142A7A8C0B0002BBAE /* AppleSpeechManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleSpeechManager.swift; sourceTree = "<group>"; };
-		C1106F152A7A8C0B0002BBAE /* SelmaVoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelmaVoice.swift; sourceTree = "<group>"; };
+		C1106F152A7A8C0B0002BBAE /* SelmaVoiceImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelmaVoiceImport.swift; sourceTree = "<group>"; };
 		C1106F1D2A7A8CD10002BBAE /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		C1106F1F2A7A8CF00002BBAE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C1106F212A7A8E070002BBAE /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
@@ -68,6 +71,9 @@
 		C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceViewModel.swift; sourceTree = "<group>"; };
 		C13E6E992A812175007FCE64 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
 		C148C5362A8D17FF001FA256 /* AudioFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFile.swift; sourceTree = "<group>"; };
+		C148C5392A8FAFE2001FA256 /* SelmaVoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelmaVoiceManager.swift; sourceTree = "<group>"; };
+		C148C53B2A8FB067001FA256 /* SelmaVoiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelmaVoiceProvider.swift; sourceTree = "<group>"; };
+		C148C53E2A8FB1A3001FA256 /* SelmaVoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelmaVoice.swift; sourceTree = "<group>"; };
 		C15590712A8D082900269CE9 /* ElevenLabsVoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevenLabsVoiceSettingsView.swift; sourceTree = "<group>"; };
 		C15590732A8D096700269CE9 /* VoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSettingsView.swift; sourceTree = "<group>"; };
 		C16145C92A7B935B0037AD4B /* Locale+displayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+displayName.swift"; sourceTree = "<group>"; };
@@ -99,9 +105,9 @@
 		C10687072A8273C100ED796D /* ElevenLabs */ = {
 			isa = PBXGroup;
 			children = (
+				C1106F112A7A8C0A0002BBAE /* ElevenLabsVoiceManager.swift */,
 				C10687002A82719600ED796D /* ElevenLabsVoiceProvider.swift */,
 				C10687082A8273D700ED796D /* ElevenLabsVoice.swift */,
-				C1106F112A7A8C0A0002BBAE /* ElevenLabsVoiceManager.swift */,
 				C106870C2A85096E00ED796D /* ElevenLabsVoiceSettings.swift */,
 				C15590712A8D082900269CE9 /* ElevenLabsVoiceSettingsView.swift */,
 			);
@@ -133,13 +139,13 @@
 				C15590732A8D096700269CE9 /* VoiceSettingsView.swift */,
 				C1D207772A80CD9500F56E26 /* VoiceController.swift */,
 				C13E6E992A812175007FCE64 /* AudioPlayerController.swift */,
-				C1106F252A7A90650002BBAE /* VoiceProvider.swift */,
-				C1106F272A7A980C0002BBAE /* Voice.swift */,
+				C148C53D2A8FB13F001FA256 /* Protocols */,
 				C10686FE2A825D9300ED796D /* VoiceSettings.swift */,
 				C106870A2A85085800ED796D /* Utilities.swift */,
 				C148C5362A8D17FF001FA256 /* AudioFile.swift */,
 				C10687042A82739D00ED796D /* Apple */,
 				C10687072A8273C100ED796D /* ElevenLabs */,
+				C148C5382A8FAEE4001FA256 /* SelmaVoice */,
 				C16145C92A7B935B0037AD4B /* Locale+displayName.swift */,
 				C1106F102A7A8BFF0002BBAE /* Import */,
 				C1106F052A7A7F770002BBAE /* Assets.xcassets */,
@@ -164,11 +170,30 @@
 				C1106F1D2A7A8CD10002BBAE /* LanguageManager.swift */,
 				C1106F142A7A8C0B0002BBAE /* AppleSpeechManager.swift */,
 				C1106F132A7A8C0B0002BBAE /* PodcastVoice.swift */,
-				C1106F152A7A8C0B0002BBAE /* SelmaVoice.swift */,
+				C1106F152A7A8C0B0002BBAE /* SelmaVoiceImport.swift */,
 				C1106F122A7A8C0B0002BBAE /* VoiceManagerOld.swift */,
 				C1106F1F2A7A8CF00002BBAE /* Constants.swift */,
 			);
 			path = Import;
+			sourceTree = "<group>";
+		};
+		C148C5382A8FAEE4001FA256 /* SelmaVoice */ = {
+			isa = PBXGroup;
+			children = (
+				C148C5392A8FAFE2001FA256 /* SelmaVoiceManager.swift */,
+				C148C53B2A8FB067001FA256 /* SelmaVoiceProvider.swift */,
+				C148C53E2A8FB1A3001FA256 /* SelmaVoice.swift */,
+			);
+			path = SelmaVoice;
+			sourceTree = "<group>";
+		};
+		C148C53D2A8FB13F001FA256 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C1106F252A7A90650002BBAE /* VoiceProvider.swift */,
+				C1106F272A7A980C0002BBAE /* Voice.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +266,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C148C53F2A8FB1A3001FA256 /* SelmaVoice.swift in Sources */,
+				C148C53C2A8FB067001FA256 /* SelmaVoiceProvider.swift in Sources */,
 				C1106F282A7A980C0002BBAE /* Voice.swift in Sources */,
 				C106870D2A85096E00ED796D /* ElevenLabsVoiceSettings.swift in Sources */,
 				C10687032A82739200ED796D /* AppleVoice.swift in Sources */,
@@ -258,7 +285,7 @@
 				C16145CA2A7B935B0037AD4B /* Locale+displayName.swift in Sources */,
 				C1106F262A7A90650002BBAE /* VoiceProvider.swift in Sources */,
 				C1106F2C2A7A9B330002BBAE /* VoiceViewModel.swift in Sources */,
-				C1106F1A2A7A8C0B0002BBAE /* SelmaVoice.swift in Sources */,
+				C1106F1A2A7A8C0B0002BBAE /* SelmaVoiceImport.swift in Sources */,
 				C10687062A8273B700ED796D /* AppleVoiceSettings.swift in Sources */,
 				C1106F182A7A8C0B0002BBAE /* PodcastVoice.swift in Sources */,
 				C1D207782A80CD9500F56E26 /* VoiceController.swift in Sources */,
@@ -266,6 +293,7 @@
 				C1106F022A7A7F750002BBAE /* DW_SpeakerApp.swift in Sources */,
 				C1106F1E2A7A8CD10002BBAE /* LanguageManager.swift in Sources */,
 				C1106F222A7A8E070002BBAE /* AudioManager.swift in Sources */,
+				C148C53A2A8FAFE2001FA256 /* SelmaVoiceManager.swift in Sources */,
 				C10686FF2A825D9300ED796D /* VoiceSettings.swift in Sources */,
 				C1106F202A7A8CF00002BBAE /* Constants.swift in Sources */,
 				C13E6E9A2A812175007FCE64 /* AudioPlayerController.swift in Sources */,
