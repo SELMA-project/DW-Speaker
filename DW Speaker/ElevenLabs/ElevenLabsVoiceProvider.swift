@@ -70,6 +70,7 @@ struct ElevenLabsVoiceProvider: VoiceProvider, Identifiable {
     }
     
     func preferedVoiceForLocale(locale: Locale) async -> Voice? {
+
         let availableVoices = await availableVoicesForLocale(locale: Locale.current) // the locale is not important
         return availableVoices.first(where: { voice in
             
@@ -86,6 +87,7 @@ struct ElevenLabsVoiceProvider: VoiceProvider, Identifiable {
     }
     
     func voice(forId voiceId: String) async -> Voice? {
+
         let availableVoices = await availableVoicesForLocale(locale: Locale.current) // the locale is not important
         return availableVoices.first(where: {$0.id == voiceId})!
     }

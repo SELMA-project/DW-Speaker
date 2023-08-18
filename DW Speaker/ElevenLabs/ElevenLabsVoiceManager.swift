@@ -95,6 +95,8 @@ extension ElevenLabsVoiceManager {
     /// - Returns: An array of available ElevenLabs Voices.
     func nativeVoices() async -> [NativeVoice] {
         
+        print("number of 11labs voices available: \(availableVoices.count)")
+        
         // download the voices if we haven't done so yet
         if availableVoices.count == 0 {
             availableVoices = await downloadVoices()
@@ -233,25 +235,25 @@ extension ElevenLabsVoiceManager {
         }
     }
     
-    private func voiceId(forName name: String) async -> String? {
-        
-        // download the voices if we haven't done so yet
-        if availableVoices.count == 0 {
-            self.availableVoices = await downloadVoices()
-        }
-        
-        // return the id for given name (if there is a match)
-        if let voice = self.availableVoices.first(where: {$0.name == name}) {
-            return voice.voiceId
-        }
-        
-        // fallback - no match
-        return nil
-    }
+//    private func voiceId(forName name: String) async -> String? {
+//
+//        // download the voices if we haven't done so yet
+//        if availableVoices.count == 0 {
+//            self.availableVoices = await downloadVoices()
+//        }
+//
+//        // return the id for given name (if there is a match)
+//        if let voice = self.availableVoices.first(where: {$0.name == name}) {
+//            return voice.voiceId
+//        }
+//
+//        // fallback - no match
+//        return nil
+//    }
     
     private func downloadVoices() async -> [NativeVoice] {
         
-        print("Downloading voices")
+        print("Downloading ElevenLabs voices")
         
         // generate request
         let urlRequest = urlRequest(forEndPoint: .voices)
