@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class ElevenLabsVoiceManager {
     
     let apiKey: String
@@ -94,9 +93,7 @@ extension ElevenLabsVoiceManager {
     /// Downloads an array of available ElevenLabs Voices and returns it.
     /// - Returns: An array of available ElevenLabs Voices.
     func nativeVoices() async -> [NativeVoice] {
-        
-        print("number of 11labs voices available: \(availableVoices.count)")
-        
+                
         // download the voices if we haven't done so yet
         if availableVoices.count == 0 {
             availableVoices = await downloadVoices()

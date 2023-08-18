@@ -36,9 +36,6 @@ class VoiceController {
     /// All available locales.
     func availableLocales() async -> [Locale] {
         
-        
-        
-        
         // store locales in set to assure uniqueness
         var uniqueLocaleIds: Set<String> = Set()
         

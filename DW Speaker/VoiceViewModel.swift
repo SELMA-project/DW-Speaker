@@ -22,23 +22,25 @@ class VoiceViewModel: ObservableObject {
     @Published var selectedLocaleId: String = "" {
         willSet {
             
+//            // don't  change anything if the value has not changed
+//            if newValue == selectedLocaleId {
+//                return
+//            }
+            
             print("Updating selectedLocaleId to: \(newValue)")
             
             // store in user defaults
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.selectedLocaleIdName)
                         
-
             Task {
                 
                 // find the right providers for the locale and publish them
                 let selectedLocale = Locale(identifier: selectedLocaleId)
                 let providers = await voiceController.providers(forLocale: selectedLocale) // all available providers
                 
-                DispatchQueue.main.async {
-                    self.selectableProviders = providers
-                }
-                
-                // if the currently selected providerID is not support by the locale, set a new one
+                self.selectableProviders = providers
+            
+                // if the currently selected providerId is not support by the locale, set a new one
                 if providers.first(where: {$0.id == selectedProviderId}) == nil {
                     if let firstProviderId = providers.first?.id {
                         self.selectedProviderId = firstProviderId
@@ -56,24 +58,34 @@ class VoiceViewModel: ObservableObject {
 
     }
     
+
     /// The identifer of the selected provider.
     @Published var selectedProviderId: String = "" {
         willSet {
+            
+//            // don't  change anything if the value has not changed
+//            if newValue == selectedProviderId {
+//                return
+//            }
             
             print("Updating selectedProviderId to: \(newValue)")
             
             // store in user defaults
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.selectedProviderIdName)
+                  
+            objectWillChange.send()
             
             Task {
+                
+                
                 let selectedLocale = Locale(identifier: selectedLocaleId)
                 if let selectedProvider {
+                                        
                     let voices = await selectedProvider.availableVoicesForLocale(locale: selectedLocale)
                     
                     // publish voices
-                    DispatchQueue.main.async {
-                        self.selectableVoices = voices
-                    }
+                    self.selectableVoices = voices
+                    
                     
                     // if currenty selected voice does not match any of the selectable voices...
                     if voices.first(where: { $0.id == selectedVoiceId}) == nil {
@@ -82,21 +94,22 @@ class VoiceViewModel: ObservableObject {
                         if let preferedVoiceId = await selectedProvider.preferedVoiceForLocale(locale: selectedLocale)?.id {
                             
                             // publish new voiceId
-                            DispatchQueue.main.async {
-                                self.selectedVoiceId = preferedVoiceId
-                            }
+                            self.selectedVoiceId = preferedVoiceId
                         }
                     }
                 }
             }
-            
-            objectWillChange.send()
         }
     }
     
     /// The identifier of the selected voice.
     @Published var selectedVoiceId: String = "" {
         willSet {
+            
+//            // don't  change anything if the value has not changed
+//            if newValue == selectedVoiceId {
+//                return
+//            }
             
             print("Updating selectedVoiceId to: \(newValue)")
             
@@ -155,8 +168,19 @@ class VoiceViewModel: ObservableObject {
             // get stored ids from userDefaults
             let (restoredLocaleId, restoredProviderId, restoredVoiceId) = getStoredIds()
 
-            // locale
+            // convert localeId to locale
             let restoredLocale = Locale(identifier: restoredLocaleId)
+            
+            // convert restoredProviderId to provider
+            let restoredProvider = voiceController.provider(forId: restoredProviderId)
+            
+            // Download the restoredProvider's voices ahead of time.
+            // The voices are then downloaded before a possible re-download can be triggered by updating the selectedProviderId.
+            if let restoredProvider {
+                self.selectableVoices = await restoredProvider.availableVoicesForLocale(locale: restoredLocale)
+            }
+        
+            // locale
             self.selectedLocaleId = restoredLocale.identifier // this also sets the selectable Providers
             
             // provider id
