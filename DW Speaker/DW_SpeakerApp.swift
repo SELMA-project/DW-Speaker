@@ -14,5 +14,11 @@ struct DW_SpeakerApp: App {
             ContentView()
                 .frame(minWidth: 800, minHeight: 600)
         }
+        
+#if os(macOS)
+        Settings {
+            SettingsView()
+        }
+#endif
     }
 }

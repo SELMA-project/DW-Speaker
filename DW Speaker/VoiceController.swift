@@ -26,7 +26,9 @@ class VoiceController {
         providers.append(AppleVoiceProvider())
 
         // add elevenLabs
-        if let elevenLabsProvider = ElevenLabsVoiceProvider() {
+        let elevenLabsAPIKey = UserDefaults.standard.value(forKey:  Constants.userDefaultsElevenLabsAPIKeyName) as? String
+        
+        if let elevenLabsProvider = ElevenLabsVoiceProvider(apiKey: elevenLabsAPIKey) {
             providers.append(elevenLabsProvider)
         }
         
