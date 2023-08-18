@@ -22,11 +22,6 @@ class VoiceViewModel: ObservableObject {
     @Published var selectedLocaleId: String = "" {
         willSet {
             
-//            // don't  change anything if the value has not changed
-//            if newValue == selectedLocaleId {
-//                return
-//            }
-            
             print("Updating selectedLocaleId to: \(newValue)")
             
             // store in user defaults
@@ -62,11 +57,6 @@ class VoiceViewModel: ObservableObject {
     /// The identifer of the selected provider.
     @Published var selectedProviderId: String = "" {
         willSet {
-            
-//            // don't  change anything if the value has not changed
-//            if newValue == selectedProviderId {
-//                return
-//            }
             
             print("Updating selectedProviderId to: \(newValue)")
             
@@ -105,12 +95,7 @@ class VoiceViewModel: ObservableObject {
     /// The identifier of the selected voice.
     @Published var selectedVoiceId: String = "" {
         willSet {
-            
-//            // don't  change anything if the value has not changed
-//            if newValue == selectedVoiceId {
-//                return
-//            }
-            
+                        
             print("Updating selectedVoiceId to: \(newValue)")
             
             // store in user defaults
