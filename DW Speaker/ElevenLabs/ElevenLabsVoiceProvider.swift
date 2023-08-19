@@ -18,14 +18,8 @@ struct ElevenLabsVoiceProvider: VoiceProvider, Identifiable {
     
     var allVoices = [ElevenLabsVoice]()
     
-    init?(apiKey: String? = nil) {
-        
-        if let keyToUse = apiKey ?? ProcessInfo.processInfo.environment["elevenLabsAPIKey"] {
-            elevenLabsVoiceManager = ElevenLabsVoiceManager(apiKey: keyToUse, elevenLabsModelId: .multilingualV1)
-        } else {
-            return nil
-        }
-        
+    init(userDefaultsNameForApiKey: String) {
+        elevenLabsVoiceManager = ElevenLabsVoiceManager(userDefaultsNameForApiKey: userDefaultsNameForApiKey, elevenLabsModelId: .multilingualV1)
     }
     
     func supportedLocales() async -> [Locale] {

@@ -9,11 +9,28 @@ import Foundation
 
 class ElevenLabsVoiceManager {
     
-    let apiKey: String
+    var apiKey: String {
+        
+        let userDefaultsApiKey = UserDefaults.standard.string(forKey: userDefaultsNameForApiKey)
+        let xcodeApiCode = ProcessInfo.processInfo.environment["elevenLabsAPIKey"]
+        
+//        if let keyToUse = userDefaultsApiKey ?? xcodeApiCode {
+//            elevenLabsVoiceManager = ElevenLabsVoiceManager(apiKey: keyToUse, elevenLabsModelId: .multilingualV1)
+//        } else {
+//            return nil
+//        }
+//
+//        return UserDefaults.standard.string(forKey: userDefaultsNameForApiKey) ?? ""
+        
+        return userDefaultsApiKey ?? xcodeApiCode ?? ""
+    }
     let apiVersion = "v1"
     let elevenLabsModelId: ElevenLabsModelID
     /// Cache for all downloaded voices
     private var availableVoices: [NativeVoice] = []
+    
+    /// Stores the name of the UserDefaults property conatining the ElvenLabs API Key.
+    private var userDefaultsNameForApiKey: String
 
     /// Cache of all downloaded models
     private var availableModels: [ModelQueryReply] = []
@@ -33,9 +50,10 @@ class ElevenLabsVoiceManager {
     
     /// Initializes the ElevenLabs voice manager.
     /// - Parameters:
-    ///   - apiKey: The API key to use.
-    init(apiKey: String, elevenLabsModelId: ElevenLabsModelID) {
-        self.apiKey = apiKey
+    ///   - userDefaultsNameForApiKey: Stores the name of the UserDefaults property conatining the ElvenLabs API Key.
+    ///   - elevenLabsModelId: The ID of the model to use.
+    init(userDefaultsNameForApiKey: String, elevenLabsModelId: ElevenLabsModelID) {
+        self.userDefaultsNameForApiKey = userDefaultsNameForApiKey
         self.elevenLabsModelId = elevenLabsModelId
     }
         
