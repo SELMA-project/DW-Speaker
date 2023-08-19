@@ -194,10 +194,7 @@ extension ElevenLabsVoiceManager {
         if let data = await downloadData(forUrlRequest:urlRequest) {
             
             do {
-                
-//                let jsonString = String(data: data, encoding: .utf8)
-//                print(jsonString ?? "")
-                
+                                
                 // decode JSON
                 let models = try JSONDecoder().decode([ModelQueryReply].self, from: data)
                                 
@@ -207,7 +204,7 @@ extension ElevenLabsVoiceManager {
                 print(error)
             }
         }
-
+        
         // fallback - no models
         return []
     }
