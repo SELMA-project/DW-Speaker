@@ -144,11 +144,10 @@
 				C15590732A8D096700269CE9 /* VoiceSettingsView.swift */,
 				C1D207772A80CD9500F56E26 /* VoiceController.swift */,
 				C13E6E992A812175007FCE64 /* AudioPlayerController.swift */,
-				C148C5422A8FC3BD001FA256 /* Constants.swift */,
 				C148C53D2A8FB13F001FA256 /* Protocols */,
-				C10686FE2A825D9300ED796D /* VoiceSettings.swift */,
 				C106870A2A85085800ED796D /* Utilities.swift */,
 				C148C5362A8D17FF001FA256 /* AudioFile.swift */,
+				C148C5422A8FC3BD001FA256 /* Constants.swift */,
 				C10687042A82739D00ED796D /* Apple */,
 				C10687072A8273C100ED796D /* ElevenLabs */,
 				C148C5382A8FAEE4001FA256 /* SelmaVoice */,
@@ -198,6 +197,7 @@
 			children = (
 				C1106F252A7A90650002BBAE /* VoiceProvider.swift */,
 				C1106F272A7A980C0002BBAE /* Voice.swift */,
+				C10686FE2A825D9300ED796D /* VoiceSettings.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
