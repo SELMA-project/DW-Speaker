@@ -36,7 +36,7 @@ class ElevenLabsVoiceManager {
     private var availableModels: [ModelQueryReply] = []
     
     enum ElevenLabsModelID {
-        case monolingualV1, multilingualV1
+        case monolingualV1, multilingualV1, multilingualV2
         
         var stringValue: String {
             switch self {
@@ -44,6 +44,8 @@ class ElevenLabsVoiceManager {
                 return "eleven_monolingual_v1"
             case .multilingualV1:
                 return "eleven_multilingual_v1"
+            case .multilingualV2:
+                return "eleven_multilingual_v2"
             }
         }
     }
@@ -171,6 +173,7 @@ extension ElevenLabsVoiceManager {
             var result = Locale(identifier: self.languageId)
             
             // overwrite to add country code if only language is specified
+            if languageId == "en" {result = Locale(identifier: "en-US")}
             if languageId == "de" {result = Locale(identifier: "de-DE")}
             if languageId == "pl" {result = Locale(identifier: "pl-PL")}
             if languageId == "es" {result = Locale(identifier: "es-ES")}
@@ -178,6 +181,28 @@ extension ElevenLabsVoiceManager {
             if languageId == "it" {result = Locale(identifier: "it-IT")}
             if languageId == "pt" {result = Locale(identifier: "pt-PT")}
             if languageId == "hi" {result = Locale(identifier: "hi-IN")}
+            if languageId == "ar" {result = Locale(identifier: "ar-EG")}
+
+            // added through multilingual V2
+            if languageId == "ja" {result = Locale(identifier: "ja-JP")}
+            if languageId == "zh" {result = Locale(identifier: "zh-CN")}
+            if languageId == "ko" {result = Locale(identifier: "ko-KP")}
+            if languageId == "id" {result = Locale(identifier: "id-ID")}
+            if languageId == "nl" {result = Locale(identifier: "nl-NL")}
+            if languageId == "tr" {result = Locale(identifier: "tr-TR")}
+            if languageId == "fil" {result = Locale(identifier: "fil-PH")}
+            if languageId == "sv" {result = Locale(identifier: "sv-SE")}
+            if languageId == "bg" {result = Locale(identifier: "bg-BG")}
+            if languageId == "ro" {result = Locale(identifier: "ro-RO")}
+            if languageId == "cs" {result = Locale(identifier: "cs-CZ")}
+            if languageId == "el" {result = Locale(identifier: "el-GR")}
+            if languageId == "fi" {result = Locale(identifier: "fi-FI")}
+            if languageId == "hr" {result = Locale(identifier: "hr-HR")}
+            if languageId == "ms" {result = Locale(identifier: "ms-MY")}
+            if languageId == "sk" {result = Locale(identifier: "sk-SK")}
+            if languageId == "da" {result = Locale(identifier: "da-DK")}
+            if languageId == "ta" {result = Locale(identifier: "ta-IN")}
+            if languageId == "uk" {result = Locale(identifier: "uk-UA")}
             
             return result
         }
