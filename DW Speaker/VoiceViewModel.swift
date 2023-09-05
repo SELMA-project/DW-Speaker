@@ -13,11 +13,10 @@ class VoiceViewModel: ObservableObject {
     
     var voiceController: VoiceController
     var audioPlayerController: AudioPlayerController
-
+    
     @Published var selectableLocales: [Locale] = []
     @Published var selectableProviders: [VoiceProvider] = []
     @Published var selectableVoices: [Voice] = []
-
     
     /// The identifier of the selected language.
     @Published var selectedLocaleId: String = "" {
@@ -27,7 +26,7 @@ class VoiceViewModel: ObservableObject {
             
             // store in user defaults
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.selectedLocaleIdName)
-                        
+            
             Task {
                 
                 // find the right providers for the locale and publish them
@@ -35,7 +34,7 @@ class VoiceViewModel: ObservableObject {
                 let providers = await voiceController.providers(forLocale: selectedLocale) // all available providers
                 
                 self.selectableProviders = providers
-            
+                
                 // if the currently selected providerId is not support by the locale, set a new one
                 if providers.first(where: {$0.id == selectedProviderId}) == nil {
                     if let firstProviderId = providers.first?.id {
@@ -49,12 +48,12 @@ class VoiceViewModel: ObservableObject {
             
             // manual publication
             objectWillChange.send()
-
+            
         }
-
+        
     }
     
-
+    
     /// The identifer of the selected provider.
     @Published var selectedProviderId: String = "" {
         willSet {
@@ -63,7 +62,7 @@ class VoiceViewModel: ObservableObject {
             
             // store in user defaults
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.selectedProviderIdName)
-                  
+            
             objectWillChange.send()
             
             Task {
@@ -71,7 +70,7 @@ class VoiceViewModel: ObservableObject {
                 
                 let selectedLocale = Locale(identifier: selectedLocaleId)
                 if let selectedProvider {
-                                        
+                    
                     let voices = await selectedProvider.availableVoicesForLocale(locale: selectedLocale)
                     
                     // publish voices
@@ -96,7 +95,7 @@ class VoiceViewModel: ObservableObject {
     /// The identifier of the selected voice.
     @Published var selectedVoiceId: String = "" {
         willSet {
-                        
+            
             print("Updating selectedVoiceId to: \(newValue)")
             
             // store in user defaults
@@ -122,23 +121,27 @@ class VoiceViewModel: ObservableObject {
     
     @Published var playerStatus: PlayerStatus = .idle
     
-    struct UserDefaultKeys {
-        static let selectedLocaleIdName = "voiceViewModelSelectedLocaleId"
-        static let selectedProviderIdName = "voiceViewModelSelectedProviderId"
-        static let selectedVoiceIdName = "voiceViewModelSelectedVoiceId"
-    }
-    
-
     
     init() {
         
         /// Access to voice functionalitites
         self.voiceController = VoiceController(userDefaultsElevenLabsAPIKeyName: Constants.userDefaultsElevenLabsAPIKeyName)
-
-        /// Access to voice functionalitites
+        
+        /// Access to audio player functionalitites
         self.audioPlayerController = AudioPlayerController()
         
         restoreDefaults()
+    }
+    
+}
+
+// MARK: Working with defaults
+extension VoiceViewModel {
+    
+    struct UserDefaultKeys {
+        static let selectedLocaleIdName = "voiceViewModelSelectedLocaleId"
+        static let selectedProviderIdName = "voiceViewModelSelectedProviderId"
+        static let selectedVoiceIdName = "voiceViewModelSelectedVoiceId"
     }
     
     private func restoreDefaults() {
@@ -147,13 +150,13 @@ class VoiceViewModel: ObservableObject {
             
             // register defaults for all ids
             await registerDefaults()
-
+            
             // all available locales can be selected
             self.selectableLocales = await voiceController.availableLocales() // all available locales
             
             // get stored ids from userDefaults
             let (restoredLocaleId, restoredProviderId, restoredVoiceId) = getStoredIds()
-
+            
             // convert localeId to locale
             let restoredLocale = Locale(identifier: restoredLocaleId)
             
@@ -165,22 +168,23 @@ class VoiceViewModel: ObservableObject {
             if let restoredProvider {
                 self.selectableVoices = await restoredProvider.availableVoicesForLocale(locale: restoredLocale)
             }
-        
+            
             // locale
             self.selectedLocaleId = restoredLocale.identifier // this also sets the selectable Providers
             
             // provider id
             self.selectedProviderId = restoredProviderId
-        
+            
             // voiceId
             self.selectedVoiceId = restoredVoiceId
             
         }
     }
-        
+    
+    
     
     private func registerDefaults() async {
-      
+        
         // which provider and locale  should be shosen when the app starts the first time?
         let defaultLocaleId = "en-US"
         let defaultProvider = AppleVoiceProvider()
@@ -195,9 +199,11 @@ class VoiceViewModel: ObservableObject {
             UserDefaultKeys.selectedProviderIdName: defaultProviderId,
             UserDefaultKeys.selectedVoiceIdName: defaultVoiceId,
         ])
-                    
+        
     }
     
+    /// Reads stored ids from userDefaults.
+    /// - Returns: A tuple of (selectedLocaleId, selectedProviderId, selectedVoiceId)
     private func getStoredIds() -> (selectedLocaleId: String, selectedProviderId: String, selectedVoiceId: String) {
         
         let localekey = UserDefaultKeys.selectedLocaleIdName
@@ -213,8 +219,15 @@ class VoiceViewModel: ObservableObject {
         
         return (selectedLocaleId: selectedLocaleId, selectedProviderId: selectedProviderId, selectedVoiceId: selectedVoiceId)
     }
-
     
+}
+
+
+// MARK: Speaking, stoping and rendeing text.
+extension VoiceViewModel {
+
+    /// Speaks given text.
+    /// - Parameter text: The text to speak.
     func speak(text: String) {
 
         Task {
@@ -231,30 +244,15 @@ class VoiceViewModel: ObservableObject {
         }
     }
     
+    /// Stops audio playback.
     func stopSpeaking() {
         audioPlayerController.stopAudio()
     }
     
-    
-    func audioURL(fromText text: String) async -> URL?  {
-
-        var result: URL?
-        
-        if let selectedVoice = await selectedProvider?.voice(forId: selectedVoiceId) {
-        
-            playerStatus = .rendering
-            
-            if let audioURL = await voiceController.synthesizeText(text, usingVoice: selectedVoice, settings: voiceSettings) {
-                result = audioURL
-            }
-        }
-        
-        playerStatus = .idle
-        
-        return result
-        
-    }
-    
+    /// Converts given text to speech and stores in in the given `destinationURL`.
+    /// - Parameters:
+    ///   - text: The text to convert,
+    ///   - destinationURL: The file URL in which the resulting speech should be stored.
     func render(text: String, toURL destinationURL: URL) async {
         
         if let selectedVoice = await selectedProvider?.voice(forId: selectedVoiceId) {
