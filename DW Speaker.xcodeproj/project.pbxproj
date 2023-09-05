@@ -21,7 +21,6 @@
 		C1106F2C2A7A9B330002BBAE /* VoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */; };
 		C13992B12AA727D9008B93CC /* AppleVoiceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13992B02AA727D8008B93CC /* AppleVoiceSettingsView.swift */; };
 		C13992B32AA727E5008B93CC /* ElevenLabsVoiceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13992B22AA727E5008B93CC /* ElevenLabsVoiceSettingsView.swift */; };
-		C148C5372A8D17FF001FA256 /* AudioFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148C5362A8D17FF001FA256 /* AudioFile.swift */; };
 		C148C5412A8FC306001FA256 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148C5402A8FC306001FA256 /* SettingsView.swift */; };
 		C148C5432A8FC3BD001FA256 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148C5422A8FC3BD001FA256 /* Constants.swift */; };
 		C14A2A0D2AA762DF00ABBA16 /* DWSpeakerKit in Frameworks */ = {isa = PBXBuildFile; productRef = C14A2A0C2AA762DF00ABBA16 /* DWSpeakerKit */; };
@@ -45,7 +44,6 @@
 		C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceViewModel.swift; sourceTree = "<group>"; };
 		C13992B02AA727D8008B93CC /* AppleVoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleVoiceSettingsView.swift; sourceTree = "<group>"; };
 		C13992B22AA727E5008B93CC /* ElevenLabsVoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevenLabsVoiceSettingsView.swift; sourceTree = "<group>"; };
-		C148C5362A8D17FF001FA256 /* AudioFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFile.swift; sourceTree = "<group>"; };
 		C148C5402A8FC306001FA256 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C148C5422A8FC3BD001FA256 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C15590732A8D096700269CE9 /* VoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSettingsView.swift; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 				C15590732A8D096700269CE9 /* VoiceSettingsView.swift */,
 				C13992B02AA727D8008B93CC /* AppleVoiceSettingsView.swift */,
 				C13992B22AA727E5008B93CC /* ElevenLabsVoiceSettingsView.swift */,
-				C148C5362A8D17FF001FA256 /* AudioFile.swift */,
 				C148C5422A8FC3BD001FA256 /* Constants.swift */,
 				C1106F102A7A8BFF0002BBAE /* Import */,
 				C1106F052A7A7F770002BBAE /* Assets.xcassets */,
@@ -205,7 +202,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C148C5372A8D17FF001FA256 /* AudioFile.swift in Sources */,
 				C1106F192A7A8C0B0002BBAE /* AppleSpeechManager.swift in Sources */,
 				C15590742A8D096700269CE9 /* VoiceSettingsView.swift in Sources */,
 				C1106F042A7A7F750002BBAE /* ContentView.swift in Sources */,
