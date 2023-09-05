@@ -11,11 +11,19 @@ import DWSpeakerKit
 @MainActor
 class VoiceViewModel: ObservableObject {
     
+    /// Access point to for text-to-speech conversion.
     var voiceController: VoiceController
+    
+    /// Used to play and stop speech audio.
     var audioPlayerController: AudioPlayerController
     
+    /// Stores which locales can be selected.
     @Published var selectableLocales: [Locale] = []
+    
+    /// Stores which providers can be selected.
     @Published var selectableProviders: [VoiceProvider] = []
+    
+    /// Stores whih voices can be selected.
     @Published var selectableVoices: [Voice] = []
     
     /// The identifier of the selected language.
@@ -29,21 +37,9 @@ class VoiceViewModel: ObservableObject {
             
             Task {
                 
-                // find the right providers for the locale and publish them
-                let selectedLocale = Locale(identifier: selectedLocaleId)
-                let providers = await voiceController.providers(forLocale: selectedLocale) // all available providers
-                
+                let (providers, suggestedProviderId) = await voiceController.findProviders(forLocaleId: newValue, currentProviderId: selectedProviderId)
                 self.selectableProviders = providers
-                
-                // if the currently selected providerId is not support by the locale, set a new one
-                if providers.first(where: {$0.id == selectedProviderId}) == nil {
-                    if let firstProviderId = providers.first?.id {
-                        self.selectedProviderId = firstProviderId
-                    }
-                } else { // otherwise, re-set the existing providerID -> this will trigger the willSet code to adjust the voices
-                    self.selectedProviderId = self.selectedProviderId
-                }
-                
+                self.selectedProviderId = suggestedProviderId
             }
             
             // manual publication
@@ -52,7 +48,7 @@ class VoiceViewModel: ObservableObject {
         }
         
     }
-    
+
     
     /// The identifer of the selected provider.
     @Published var selectedProviderId: String = "" {
@@ -115,10 +111,12 @@ class VoiceViewModel: ObservableObject {
         return voiceController.provider(forId: selectedProviderId)
     }
     
+    /// Enumerates the different states that the audio player can take.
     enum PlayerStatus {
         case idle, rendering, playing
     }
     
+    /// The current status of the audio player.
     @Published var playerStatus: PlayerStatus = .idle
     
     
@@ -223,7 +221,7 @@ extension VoiceViewModel {
 }
 
 
-// MARK: Speaking, stoping and rendeing text.
+// MARK: Speaking, stoping and rendering text.
 extension VoiceViewModel {
 
     /// Speaks given text.
