@@ -40,9 +40,12 @@ class VoiceViewModel: ObservableObject {
             
             Task {
                 // derive providers array and providerId
-                let (providers, suggestedProviderId) = await voiceController.findProviders(forLocaleId: newValue, currentProviderId: selectedProviderId)
+                let (providers, suggestedProvider) = await voiceController.findProviders(forLocaleId: newValue, currentProviderId: selectedProviderId)
                 self.selectableProviders = providers
-                self.selectedProviderId = suggestedProviderId
+                
+                if let suggestedProvider {
+                    self.selectedProviderId = suggestedProvider.id
+                }
             }
         }
         
@@ -62,9 +65,12 @@ class VoiceViewModel: ObservableObject {
             
             Task {
                 // derive voices array and suggested voiceId
-                let (voices, suggestedVoiceId) = await voiceController.findVoices(forLocaleId: selectedLocaleId, forProviderId: newValue, currentVoiceId: selectedVoiceId)
+                let (voices, suggestedVoice) = await voiceController.findVoices(forLocaleId: selectedLocaleId, forProviderId: newValue, currentVoiceId: selectedVoiceId)
                 self.selectableVoices = voices
-                self.selectedVoiceId = suggestedVoiceId
+                
+                if let suggestedVoice {
+                    self.selectedVoiceId = suggestedVoice.id
+                }
             }
         }
     }
@@ -147,7 +153,9 @@ extension VoiceViewModel {
             // Download the restoredProvider's voices ahead of time.
             // The voices are then downloaded before a possible re-download can be triggered by updating the selectedProviderId.
             if let restoredProvider {
-                self.selectableVoices = await restoredProvider.availableVoicesForLocale(locale: restoredLocale)
+                //self.selectableVoices = await restoredProvider.availableVoicesForLocale(locale: restoredLocale)
+                let (voices, _) = await voiceController.findVoices(forLocaleId: restoredLocale.identifier, forProviderId: restoredProvider.id, currentVoiceId: nil)
+                self.selectableVoices = voices
             }
             
             // locale
