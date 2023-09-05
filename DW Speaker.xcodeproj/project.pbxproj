@@ -19,12 +19,12 @@
 		C1106F202A7A8CF00002BBAE /* ConstantsOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F1F2A7A8CF00002BBAE /* ConstantsOld.swift */; };
 		C1106F222A7A8E070002BBAE /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F212A7A8E070002BBAE /* AudioManager.swift */; };
 		C1106F2C2A7A9B330002BBAE /* VoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */; };
-		C13992AD2AA714A9008B93CC /* DWSpeakerKit in Frameworks */ = {isa = PBXBuildFile; productRef = C13992AC2AA714A9008B93CC /* DWSpeakerKit */; };
 		C13992B12AA727D9008B93CC /* AppleVoiceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13992B02AA727D8008B93CC /* AppleVoiceSettingsView.swift */; };
 		C13992B32AA727E5008B93CC /* ElevenLabsVoiceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13992B22AA727E5008B93CC /* ElevenLabsVoiceSettingsView.swift */; };
 		C148C5372A8D17FF001FA256 /* AudioFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148C5362A8D17FF001FA256 /* AudioFile.swift */; };
 		C148C5412A8FC306001FA256 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148C5402A8FC306001FA256 /* SettingsView.swift */; };
 		C148C5432A8FC3BD001FA256 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148C5422A8FC3BD001FA256 /* Constants.swift */; };
+		C14A2A0D2AA762DF00ABBA16 /* DWSpeakerKit in Frameworks */ = {isa = PBXBuildFile; productRef = C14A2A0C2AA762DF00ABBA16 /* DWSpeakerKit */; };
 		C15590742A8D096700269CE9 /* VoiceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15590732A8D096700269CE9 /* VoiceSettingsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +43,6 @@
 		C1106F1F2A7A8CF00002BBAE /* ConstantsOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsOld.swift; sourceTree = "<group>"; };
 		C1106F212A7A8E070002BBAE /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceViewModel.swift; sourceTree = "<group>"; };
-		C13992AA2AA7145E008B93CC /* DWSpeakerKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DWSpeakerKit; path = ../DWSpeakerKit; sourceTree = "<group>"; };
 		C13992B02AA727D8008B93CC /* AppleVoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleVoiceSettingsView.swift; sourceTree = "<group>"; };
 		C13992B22AA727E5008B93CC /* ElevenLabsVoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevenLabsVoiceSettingsView.swift; sourceTree = "<group>"; };
 		C148C5362A8D17FF001FA256 /* AudioFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFile.swift; sourceTree = "<group>"; };
@@ -57,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C13992AD2AA714A9008B93CC /* DWSpeakerKit in Frameworks */,
+				C14A2A0D2AA762DF00ABBA16 /* DWSpeakerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,7 +66,6 @@
 		C1106EF52A7A7F750002BBAE = {
 			isa = PBXGroup;
 			children = (
-				C13992AA2AA7145E008B93CC /* DWSpeakerKit */,
 				C1106F002A7A7F750002BBAE /* DW Speaker */,
 				C1106EFF2A7A7F750002BBAE /* Products */,
 				C13992AB2AA714A9008B93CC /* Frameworks */,
@@ -148,7 +146,7 @@
 			);
 			name = "DW Speaker";
 			packageProductDependencies = (
-				C13992AC2AA714A9008B93CC /* DWSpeakerKit */,
+				C14A2A0C2AA762DF00ABBA16 /* DWSpeakerKit */,
 			);
 			productName = "DW Speaker";
 			productReference = C1106EFE2A7A7F750002BBAE /* DW Speaker.app */;
@@ -178,6 +176,9 @@
 				Base,
 			);
 			mainGroup = C1106EF52A7A7F750002BBAE;
+			packageReferences = (
+				C14A2A0B2AA762DF00ABBA16 /* XCRemoteSwiftPackageReference "DWSpeakerKit" */,
+			);
 			productRefGroup = C1106EFF2A7A7F750002BBAE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -436,9 +437,21 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		C14A2A0B2AA762DF00ABBA16 /* XCRemoteSwiftPackageReference "DWSpeakerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dw-innovation/DWSpeakerKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		C13992AC2AA714A9008B93CC /* DWSpeakerKit */ = {
+		C14A2A0C2AA762DF00ABBA16 /* DWSpeakerKit */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = C14A2A0B2AA762DF00ABBA16 /* XCRemoteSwiftPackageReference "DWSpeakerKit" */;
 			productName = DWSpeakerKit;
 		};
 /* End XCSwiftPackageProductDependency section */
