@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import DWSpeakerKit
 
 @MainActor
 class VoiceViewModel: ObservableObject {
@@ -132,7 +133,7 @@ class VoiceViewModel: ObservableObject {
     init() {
         
         /// Access to voice functionalitites
-        self.voiceController = VoiceController()
+        self.voiceController = VoiceController(userDefaultsElevenLabsAPIKeyName: Constants.userDefaultsElevenLabsAPIKeyName)
 
         /// Access to voice functionalitites
         self.audioPlayerController = AudioPlayerController()
@@ -267,27 +268,6 @@ class VoiceViewModel: ObservableObject {
             playerStatus = .idle
         }
     }
-    
-//    func audioFile(fromText text: String) async -> AudioFile?  {
-//
-//        var audioFile: AudioFile?
-//
-//        if let selectedVoice = await selectedProvider?.voice(forId: selectedVoiceId) {
-//
-//            playerStatus = .rendering
-//
-//            if let audioURL = await voiceController.synthesizeText(text, usingVoice: selectedVoice, settings: voiceSettings) {
-//                if let audioData = try? Data(contentsOf: audioURL) {
-//                    audioFile = AudioFile(data: audioData)
-//                }
-//            }
-//        }
-//
-//        playerStatus = .idle
-//
-//        return audioFile
-//
-//    }
 
 }
 

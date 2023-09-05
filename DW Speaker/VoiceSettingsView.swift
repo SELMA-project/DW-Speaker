@@ -8,6 +8,7 @@
 //
 
 import SwiftUI
+import DWSpeakerKit
 
 struct VoiceSettingsView: View {
     
