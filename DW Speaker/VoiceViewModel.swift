@@ -35,16 +35,15 @@ class VoiceViewModel: ObservableObject {
             // store in user defaults
             UserDefaults.standard.set(newValue, forKey: UserDefaultKeys.selectedLocaleIdName)
             
+            // manual publication
+            objectWillChange.send()
+            
             Task {
-                
+                // derive providers array and providerId
                 let (providers, suggestedProviderId) = await voiceController.findProviders(forLocaleId: newValue, currentProviderId: selectedProviderId)
                 self.selectableProviders = providers
                 self.selectedProviderId = suggestedProviderId
             }
-            
-            // manual publication
-            objectWillChange.send()
-            
         }
         
     }
@@ -62,31 +61,15 @@ class VoiceViewModel: ObservableObject {
             objectWillChange.send()
             
             Task {
-                
-                
-                let selectedLocale = Locale(identifier: selectedLocaleId)
-                if let selectedProvider {
-                    
-                    let voices = await selectedProvider.availableVoicesForLocale(locale: selectedLocale)
-                    
-                    // publish voices
-                    self.selectableVoices = voices
-                    
-                    
-                    // if currenty selected voice does not match any of the selectable voices...
-                    if voices.first(where: { $0.id == selectedVoiceId}) == nil {
-                        
-                        // find the provier'S refered voice
-                        if let preferedVoiceId = await selectedProvider.preferedVoiceForLocale(locale: selectedLocale)?.id {
-                            
-                            // publish new voiceId
-                            self.selectedVoiceId = preferedVoiceId
-                        }
-                    }
-                }
+                // derive voices array and suggested voiceId
+                let (voices, suggestedVoiceId) = await voiceController.findVoices(forLocaleId: selectedLocaleId, forProviderId: newValue, currentVoiceId: selectedVoiceId)
+                self.selectableVoices = voices
+                self.selectedVoiceId = suggestedVoiceId
             }
         }
     }
+    
+
     
     /// The identifier of the selected voice.
     @Published var selectedVoiceId: String = "" {
