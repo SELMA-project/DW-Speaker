@@ -80,7 +80,6 @@ struct ContentView: View {
                         Text(voiceViewModel.playerStatus == .idle ? "Speak" : "Stop")
                             .frame(maxWidth: .infinity)
                     }
-                    //.buttonStyle(BlueButtonStyle())
                     .disabled(voiceViewModel.playerStatus == .rendering)
                     
                     Button {
