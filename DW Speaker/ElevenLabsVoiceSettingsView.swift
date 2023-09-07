@@ -29,10 +29,26 @@ struct ElevenLabsVoiceSettingsView: View {
         }
     }
     
+    var styleSlider: some View {
+        HStack {
+            Slider(value: $voiceViewModel.voiceSettings.elevenLabs.styleExaggeration, in: 0...1) {
+                Text("Style Exaggeration:")
+            }
+            Text("\(voiceViewModel.voiceSettings.elevenLabs.styleExaggeration.formatted(.number.precision(.fractionLength(1))))")
+        }
+    }
+    
+    var speakerBoostToggle: some View {
+        Toggle("Speaker Boost:", isOn: $voiceViewModel.voiceSettings.elevenLabs.speakerBoost)
+            .toggleStyle(.switch)
+    }
+    
     var body: some View {
         Form {
             stabilitySlider
             similaritySlider
+            styleSlider
+            speakerBoostToggle
         }
     }
 }
