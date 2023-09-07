@@ -28,6 +28,7 @@
 		C1106F072A7A7F770002BBAE /* DW_Speaker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DW_Speaker.entitlements; sourceTree = "<group>"; };
 		C1106F092A7A7F770002BBAE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C1106F2B2A7A9B330002BBAE /* VoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceViewModel.swift; sourceTree = "<group>"; };
+		C135E28D2AA9B15B007477BE /* DWSpeakerKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DWSpeakerKit; path = "../00-packages/DWSpeakerKit/DWSpeakerKit"; sourceTree = "<group>"; };
 		C13992B02AA727D8008B93CC /* AppleVoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleVoiceSettingsView.swift; sourceTree = "<group>"; };
 		C13992B22AA727E5008B93CC /* ElevenLabsVoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevenLabsVoiceSettingsView.swift; sourceTree = "<group>"; };
 		C148C5402A8FC306001FA256 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -50,6 +51,7 @@
 		C1106EF52A7A7F750002BBAE = {
 			isa = PBXGroup;
 			children = (
+				C135E28D2AA9B15B007477BE /* DWSpeakerKit */,
 				C1106F002A7A7F750002BBAE /* DW Speaker */,
 				C1106EFF2A7A7F750002BBAE /* Products */,
 				C13992AB2AA714A9008B93CC /* Frameworks */,
