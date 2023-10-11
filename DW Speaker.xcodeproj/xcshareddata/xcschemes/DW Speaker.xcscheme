@@ -55,6 +55,11 @@
             value = "e61e2148f147155815c31a92bd9a104c"
             isEnabled = "YES">
          </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "priberamAPIKey"
+            value = "eyJPcmNoZXN0cmF0aW9uSWRlbnRpdHlJZCI6IjEzODAwOTU2LWM3OWMtNGNlNS05Y2E5LWMyMjZmNGQ5MzNlMyIsIk9yY2hlc3RyYXRpb25JZGVudGl0eUtleSI6IlF3b3BwM09WWGI2TjEyblJzSEdLRFluWWx1aDJRVWpSdkpTbDd2MjFRUThHU0ZHT05BTjU4aTlIaTVLdnpZTXMiLCJXb3Jrc3BhY2VJZCI6Ijg2NmM1MWM5LTI0MDUtNDE2OC05NjFlLWZhMzY3M2ExMjcxMiJ9"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
