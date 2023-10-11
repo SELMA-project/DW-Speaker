@@ -7,12 +7,20 @@
 
 import SwiftUI
 
+// TODO: Remove
+import DWSpeakerKit
+
 @main
 struct DW_SpeakerApp: App {
+        
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .frame(minWidth: 800, minHeight: 600)
+                .task {
+                    let priberamVoiceManager = PriberamVoiceManager()
+                    await priberamVoiceManager?.test()
+                }
         }
         
 #if os(macOS)
