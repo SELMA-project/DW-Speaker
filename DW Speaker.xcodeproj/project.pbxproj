@@ -34,6 +34,7 @@
 		C148C5402A8FC306001FA256 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C148C5422A8FC3BD001FA256 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C15590732A8D096700269CE9 /* VoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSettingsView.swift; sourceTree = "<group>"; };
+		F79FDB032AD6A9D80066309C /* DWSpeakerKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DWSpeakerKit; path = ../00_packages/DWSpeakerKit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +52,7 @@
 		C1106EF52A7A7F750002BBAE = {
 			isa = PBXGroup;
 			children = (
+				F79FDB032AD6A9D80066309C /* DWSpeakerKit */,
 				C1106F002A7A7F750002BBAE /* DW Speaker */,
 				C1106EFF2A7A7F750002BBAE /* Products */,
 				C13992AB2AA714A9008B93CC /* Frameworks */,
