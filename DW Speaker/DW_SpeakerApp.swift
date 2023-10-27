@@ -13,7 +13,7 @@ import DWSpeakerKit
 @main
 struct DW_SpeakerApp: App {
     
-    let priberamGoogleVoiceManager = PriberamVoiceManager(voiceSubProvider: .google, executeTest: true)
+    //let priberamGoogleVoiceManager = PriberamVoiceManager(voiceSubProvider: .google, executeTest: true)
     
     var body: some Scene {
         WindowGroup {
