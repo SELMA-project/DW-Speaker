@@ -13,12 +13,19 @@ import DWSpeakerKit
 @main
 struct DW_SpeakerApp: App {
     
-    //let priberamGoogleVoiceManager = PriberamVoiceManager(voiceSubProvider: .google, executeTest: true)
+    
+    // TODO: remove after testing
+    let priberamGoogleVoiceManager = PriberamVoiceManager(voiceSubProvider: .azure, executeTest: true)
     
     var body: some Scene {
+        
         WindowGroup {
             ContentView()
                 .frame(minWidth: 800, minHeight: 600)
+                .onAppear {
+                    // WARNING: only activate to create files once.
+                    PriberamVoiceManager.createCSVDatafiles()
+                }
         }
         
 #if os(macOS)
