@@ -3,4 +3,54 @@
    uuid = "B7CB416F-0EB8-4743-B2E1-2CAB283091FB"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A9DFE3C8-7710-4E60-864B-6E2A514C6A8A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../00_packages/DWSpeakerKit/Sources/DWSpeakerKit/PriberamVoice/PriberamVoiceManager+step1.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "createVoiceOverTask(text:voiceLocale:voiceName:voiceServiceProvider:voiceGender:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A9DFE3C8-7710-4E60-864B-6E2A514C6A8A - f84afec618ac2667"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for DWSpeakerKit.PriberamVoiceManager.createVoiceOverTask(text: Swift.String, voiceLocale: Foundation.Locale, voiceName: Swift.String, voiceServiceProvider: Swift.String, voiceGender: Swift.String) async -&gt; Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "DW Speaker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/giefera/Developer/00_packages/DWSpeakerKit/Sources/DWSpeakerKit/PriberamVoice/PriberamVoiceManager+step1.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "476">
+               </Location>
+               <Location
+                  uuid = "A9DFE3C8-7710-4E60-864B-6E2A514C6A8A - f84afec618ac2667"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for DWSpeakerKit.PriberamVoiceManager.createVoiceOverTask(text: Swift.String, voiceLocale: Foundation.Locale, voiceName: Swift.String, voiceServiceProvider: Swift.String, voiceGender: Swift.String) async -&gt; Swift.Optional&lt;Swift.String&gt;"
+                  moduleName = "DW Speaker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/giefera/Developer/00_packages/DWSpeakerKit/Sources/DWSpeakerKit/PriberamVoice/PriberamVoiceManager+step1.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "480">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
