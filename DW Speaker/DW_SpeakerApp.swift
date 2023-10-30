@@ -24,7 +24,7 @@ struct DW_SpeakerApp: App {
                 .frame(minWidth: 800, minHeight: 600)
                 .onAppear {
                     // WARNING: only activate to create files once.
-                    PriberamVoiceManager.createCSVDatafiles()
+                    //PriberamVoiceManager.createCSVDatafiles()
                 }
         }
         
