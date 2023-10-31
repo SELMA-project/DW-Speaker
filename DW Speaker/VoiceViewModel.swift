@@ -228,6 +228,8 @@ extension VoiceViewModel {
                     playerStatus = .playing
                     await audioPlayerController.playAudio(audioUrl: audioURL)
                     playerStatus = .idle
+                } else {
+                    playerStatus = .idle
                 }
             }
         }
