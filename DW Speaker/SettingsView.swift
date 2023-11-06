@@ -10,13 +10,22 @@ import SwiftUI
 struct SettingsView: View {
     
     @AppStorage(Constants.userDefaultsElevenLabsAPIKeyName) var elevenLabsAPIKey = ""
+    @AppStorage(Constants.userDefaultsPriberamAPIKeyName) var priberamAPIKey = ""
     
     var body: some View {
         
         VStack {
             Form {
                 TextField("ElevenLabs API Key:", text: $elevenLabsAPIKey)
-                Text("Please restart the app after settings the API Key.")
+                Text("Required to use ElevenLabs voices.")
+                    .font(.caption)
+                
+                TextField("Priberam API Key:", text: $priberamAPIKey)
+                Text("Required to use Google and Azure voices.")
+                    .font(.caption)
+                    .padding(.bottom, 16)
+                
+                Text("Please restart the app after setting the API keys.")
             }
             
             

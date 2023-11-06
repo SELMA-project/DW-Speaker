@@ -34,7 +34,6 @@
 		C148C5402A8FC306001FA256 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C148C5422A8FC3BD001FA256 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C15590732A8D096700269CE9 /* VoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSettingsView.swift; sourceTree = "<group>"; };
-		F724D8D42AEBB87700C4C9B8 /* DWSpeakerKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DWSpeakerKit; path = ../00_packages/DWSpeakerKit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +51,6 @@
 		C1106EF52A7A7F750002BBAE = {
 			isa = PBXGroup;
 			children = (
-				F724D8D42AEBB87700C4C9B8 /* DWSpeakerKit */,
 				C1106F002A7A7F750002BBAE /* DW Speaker */,
 				C1106EFF2A7A7F750002BBAE /* Products */,
 				C13992AB2AA714A9008B93CC /* Frameworks */,
@@ -313,7 +311,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DW Speaker/DW_Speaker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DW Speaker/Preview Content\"";
 				DEVELOPMENT_TEAM = 82DH72DY44;
@@ -336,7 +334,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lab-dw.DW-Speaker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -354,7 +352,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DW Speaker/DW_Speaker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DW Speaker/Preview Content\"";
 				DEVELOPMENT_TEAM = 82DH72DY44;
@@ -377,7 +375,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lab-dw.DW-Speaker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

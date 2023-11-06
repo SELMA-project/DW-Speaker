@@ -9,4 +9,5 @@ import Foundation
 
 class Constants {
     static let userDefaultsElevenLabsAPIKeyName = "elevenLabsAPIKey"
+    static let userDefaultsPriberamAPIKeyName = "priberamAPIKey"
 }
