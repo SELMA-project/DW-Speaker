@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "dwspeakerkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dw-innovation/DWSpeakerKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9834f61467df0b548a204d2fe8483e16e2e6320f"
+      }
+    }
+  ],
+  "version" : 2
+}
