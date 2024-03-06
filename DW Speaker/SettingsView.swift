@@ -11,6 +11,7 @@ struct SettingsView: View {
     
     @AppStorage(Constants.userDefaultsElevenLabsAPIKeyName) var elevenLabsAPIKey = ""
     @AppStorage(Constants.userDefaultsPriberamAPIKeyName) var priberamAPIKey = ""
+    @AppStorage(Constants.userDefaultsAllowClonedVoicesKeyName) var allowsClonedVoices = false
     
     var body: some View {
         
@@ -25,7 +26,12 @@ struct SettingsView: View {
                     .font(.caption)
                     .padding(.bottom, 16)
                 
-                Text("Please restart the app after setting the API keys.")
+                Toggle(isOn: $allowsClonedVoices) {
+                    Text("Allow the use of cloned voices")
+                }
+                .padding(.bottom, 16)
+                
+                Text("Please restart the app after changing the settings.")
             }
             
             

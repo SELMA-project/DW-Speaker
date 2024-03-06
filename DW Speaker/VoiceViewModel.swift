@@ -17,8 +17,7 @@ class VoiceViewModel: ObservableObject {
     /// Used to play and stop speech audio.
     var audioPlayerController: AudioPlayerController
     
-    /// Determines whether we allow cloned voices
-    let allowClonedVoices = false
+    var allowClonedVoices: Bool
     
     /// Stores which locales can be selected.
     @Published var selectableLocales: [Locale] = []
@@ -119,6 +118,9 @@ class VoiceViewModel: ObservableObject {
         
         // get priberamAPIKey from UserDefaults
         let priberamAPIKey = UserDefaults.standard.string(forKey: Constants.userDefaultsPriberamAPIKeyName)
+
+        // get allowsClonedVoices flag from UserDefaults
+        allowClonedVoices = UserDefaults.standard.bool(forKey: Constants.userDefaultsAllowClonedVoicesKeyName)
         
         /// Access to voice functionalitites
         self.voiceController = VoiceController(elevenLabsAPIKey: elevenLabsAPIKey, priberamAPIKey: priberamAPIKey, allowClonedVoices: allowClonedVoices)
