@@ -1,4 +1,5 @@
 {
+  "originHash" : "73efc1745a8347911009f52c2690964a3631c3c5ae6034f169ca097c91f02aab",
   "pins" : [
     {
       "identity" : "dwspeakerkit",
@@ -6,9 +7,9 @@
       "location" : "https://github.com/dw-innovation/DWSpeakerKit",
       "state" : {
         "branch" : "main",
-        "revision" : "72e4e4e2fd238d8f70a5783fdb56e986da623731"
+        "revision" : "00fb4f4e0c401be9219bfc1bbd3d630bdf75030e"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
